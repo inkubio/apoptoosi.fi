@@ -13,7 +13,7 @@
       <NuxtLink id="signup" to="/signup" class="nav-button">Ilmoittautuminen</NuxtLink>
       <NuxtLink id="about" to="/about" class="nav-button">Yhteystiedot</NuxtLink>
     </nav>
-    <div id="content">{{page_data.data.translations[0].event_description}} {{general_data}}</div>
+    <div id="content">{{page_data.data.translations[0].event_description}}</div>
     <home-footer id="footer"/>
   </main>
 </template>
@@ -43,7 +43,6 @@ main {
   background-image: linear-gradient(45deg, rgba(8,195,179,1) 0%, rgba(0,212,255,1) 100%);;
   background-repeat: no-repeat;
   background-size: cover;
-  filter: grayscale(100%);
 }
 .title-container {
   position: relative;
@@ -53,7 +52,7 @@ main {
 }
 #title {
   text-align: center;
-  font-size: 6em;
+  font-size: min(15vmin,6rem);
   font-weight: bold;
   font-family: 'Cinzel', serif;
   color: white;
@@ -63,7 +62,7 @@ main {
 #countdown {
   width: 100%;
   text-align: center;
-  font-size: 4em;
+  font-size: min(10vmin,4rem);
   font-weight: bold;
   font-family: 'Cinzel', serif;
   color: white;
@@ -72,14 +71,14 @@ main {
 
 #navigation {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(clamp(33%, (60rem - 100%) * 999, 100%), 1fr));
 }
 .nav-button {
   text-decoration: none;
   color: white;
   background-color: grey;
-  font-size: 2em;
-  padding: 4em 0;
+  font-size: clamp(1em, 10vmin,2rem);
+  padding: clamp(1em, 7vmax, 4em) 0;
   font-family: 'Cinzel', serif;
   text-align: center;
   transition: 0.3s;
@@ -101,7 +100,7 @@ main {
   font-family: 'Roboto', sans-serif;
   text-align: center;
   margin: 2rem auto;
-  font-size: 1.5em;
+  font-size: clamp(1em, 3vmin,1.5rem);
   max-width: 700px;
 }
 

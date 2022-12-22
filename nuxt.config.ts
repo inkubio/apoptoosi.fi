@@ -6,7 +6,8 @@ export default defineNuxtConfig({
         head: {
             title: 'Apoptoosi XIX',
             meta: [
-                {name: 'description', content: 'Inkubion vuosijuhlien Apoptoosin nettisivut'}
+                {name: 'description', content: 'Inkubion vuosijuhlien Apoptoosin nettisivut'},
+                {name: "viewport", content: 'width=device-width, initial-scale=1'},
             ],
             link: [
                 {rel: 'preconnect', href: 'https://fonts.googleapis.com'},
