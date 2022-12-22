@@ -1,5 +1,8 @@
 <template>
-  <div>Footer</div>
+  <div>
+    <h2>Yhteistyössä</h2>
+    <p>Yritys 1</p>
+  </div>
 </template>
 
 <script>

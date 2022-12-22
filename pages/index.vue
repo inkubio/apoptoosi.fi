@@ -1,11 +1,11 @@
 <template>
   <main>
-    <div id="home-image">
+    <div id="home-image" :style="{'background-image': `url(${api_base + 'assets/' + page_data.data.front_image}})`}">
       <div class="title-container">
         <h1 id="title">
-          Apoptoosi XIX
+          {{general_data.data.name}}
         </h1>
-        <countdown-timer id="countdown"/>
+        <countdown-timer id="countdown" :event-date="general_data.data.event_date" />
       </div>
     </div>
     <nav id="navigation">
@@ -13,29 +13,22 @@
       <NuxtLink id="signup" to="/signup" class="nav-button">Ilmoittautuminen</NuxtLink>
       <NuxtLink id="about" to="/about" class="nav-button">Yhteystiedot</NuxtLink>
     </nav>
-    <div id="content">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi congue ultricies enim, vel maximus mauris
-      ullamcorper sed. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc in justo vel justo lobortis
-      mattis. Sed ultricies a metus eu iaculis. Nullam sit amet fringilla libero, vitae elementum augue. Etiam non
-      sapien ac velit malesuada congue. Suspendisse rhoncus pharetra metus et ullamcorper. Praesent nec quam eu tellus
-      posuere iaculis. Pellentesque blandit, risus id sollicitudin fermentum, ex felis commodo ipsum, at condimentum
-      quam elit imperdiet ligula. Nam sollicitudin id tellus in maximus.
-
-      Quisque sodales nunc sit amet nisi imperdiet egestas. Vestibulum ante ipsum primis in faucibus orci luctus et
-      ultrices posuere cubilia curae; In feugiat purus vel leo placerat dictum. Maecenas ac ultrices mi. Aenean sed leo
-      sem. Sed eros metus, facilisis eget erat non, interdum pulvinar eros. Etiam sed nunc eget elit porta euismod. Nunc
-      rutrum pulvinar risus in mollis. Proin et nisi nisi. Pellentesque ornare lectus id arcu bibendum posuere. Vivamus
-      a orci lorem. Nam cursus ultrices tortor, et semper neque volutpat sed. Aenean varius non orci vitae gravida.
-    </div>
+    <div id="content">{{page_data.data.translations[0].event_description}} {{general_data}}</div>
     <home-footer id="footer"/>
   </main>
 </template>
 
-<script>
+<script setup>
+const runtimeConfig = useRuntimeConfig()
+const api_base = runtimeConfig.public.baseURL
+
 definePageMeta({layout: "landingpage",});
-export default {
-  name: "index.vue",
-}
+
+const {data: page_data} = await useFetch('items/Homepage', {
+  baseURL: api_base,
+  query: {"fields":"front_image,translations.*", "deep[translations][_filter][languages_id][_eq]": "fi-FI"}
+})
+const {data: general_data} = await useFetch('items/General', {baseURL: api_base})
 </script>
 
 <style scoped>
@@ -47,7 +40,7 @@ main {
 #home-image {
   width: 100%;
   height: 100vh;
-  background-image: url('~/assets/apoptoosi.jpg');
+  background-image: linear-gradient(45deg, rgba(8,195,179,1) 0%, rgba(0,212,255,1) 100%);;
   background-repeat: no-repeat;
   background-size: cover;
   filter: grayscale(100%);
