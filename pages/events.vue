@@ -1,11 +1,9 @@
 <template>
-  <p>Events</p>
+  <li v-for="(event, index) in events" :key="index"></li>
 </template>
 
-<script>
-export default {
-  name: "events.vue"
-}
+<script setup>
+
 </script>
 
 <style scoped>
