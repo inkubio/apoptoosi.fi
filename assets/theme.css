@@ -1,0 +1,21 @@
+@font-face {
+    font-family: "Playfair Display";
+    src: local("Playfair Display"),     url(assets/PlayfairDisplay.ttf) format("truetype");}
+
+
+
+:root  {
+    --title_color: #101010;
+
+    --text-secondary: #f0f0f0;
+
+    --nav1: #0E3B12;
+    --nav2: #92AB9A;
+    --nav3: #4D86CF;
+
+    --primary: #006015;
+    --secondary: #84B2ED;
+
+    --body-font: 'Poppins', sans-serif;
+    --title-font: 'Playfair Display', serif;
+}

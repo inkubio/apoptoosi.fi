@@ -21,7 +21,7 @@ const {data: page_data} = await useFetch('items/About', {
 
 <style scoped>
 h2 {
-  font-family: 'Cinzel', serif;
+  font-family: var(--title-font);
   text-decoration: none;
   font-weight: normal;
   color: black;
@@ -31,20 +31,20 @@ h2 {
   font-size: min(5vmin,2rem);
 }
 p {
-  font-family: 'Roboto', sans-serif;
+  font-family: var(--body-font);
   text-align: center;
   margin: 2rem auto;
   font-size: clamp(1em, 3vmin,1.5rem);
   max-width: 700px;
 }
 address, a {
-  font-family: 'Roboto', sans-serif;
+  font-family: var(--body-font);
   text-align: center;
   margin: 2rem auto;
   font-size: clamp(1em, 3vmin,1.5rem);
   max-width: 700px;
   text-decoration: none;
-  color: green;
+  color: var(--primary);
 
 }
 </style>

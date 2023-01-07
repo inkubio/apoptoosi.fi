@@ -58,9 +58,9 @@ main {
 #title {
   text-align: center;
   font-size: min(15vmin,6rem);
-  font-weight: bold;
-  font-family: 'Cinzel', serif;
-  color: white;
+  font-weight: normal;
+  font-family: var(--title-font);
+  color: var(--title_color);
   margin-bottom: 0;
 }
 
@@ -68,9 +68,9 @@ main {
   width: 100%;
   text-align: center;
   font-size: min(10vmin,4rem);
-  font-weight: bold;
-  font-family: 'Cinzel', serif;
-  color: white;
+  font-weight: normal;
+  font-family: var(--title-font);
+  color: var(--title_color);
   margin-top: 0;
 }
 
@@ -84,7 +84,8 @@ main {
   background-color: grey;
   font-size: clamp(1em, 10vmin,2rem);
   padding: clamp(1em, 7vmax, 4em) 0;
-  font-family: 'Cinzel', serif;
+  font-family: var(--title-font);
+  font-weight: lighter;
   text-align: center;
   transition: 0.3s;
 }
@@ -92,17 +93,17 @@ main {
   opacity: 0.75;
 }
 #events {
-  background-color: #B1B2B5;
+  background-color: var(--nav1);
 }
 #signup {
-  background-color: #5f5f5f;
+  background-color: var(--nav2);
 }
 #contact {
-  background-color: #353535;
+  background-color: var(--nav3);
 }
 
 #content {
-  font-family: 'Roboto', sans-serif;
+  font-family: var(--body-font);
   text-align: center;
   margin: 2rem auto;
   font-size: clamp(1em, 3vmin,1.5rem);
@@ -110,7 +111,7 @@ main {
 }
 
 #footer {
-  background-color: black;
+  background-color: var(--secondary);
   color: white;
 }
 </style>

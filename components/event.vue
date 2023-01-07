@@ -47,7 +47,6 @@ console.log(image_right)
   background-position: center;
   background-size: cover;
   border-radius: 0 5rem 5rem 0;
-
   display: flex;
   flex-flow: column;
   justify-content: center;
@@ -56,7 +55,7 @@ console.log(image_right)
   border-radius: 5rem 0 0 5rem;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 700px) {
   .parity {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr;
@@ -68,10 +67,9 @@ console.log(image_right)
 }
 h2 {
   text-align: center;
-  font-size: min(6vmin,2rem);
-  opacity: 0.75;
-  color: white;
-  font-family: 'Cinzel', serif;
+  font-size: clamp(0.5rem, 7vmin,2.5rem);
+  color: var(--text-secondary);
+  font-family: var(--title-font);
   margin-bottom: 2em;
 }
 .info {
@@ -81,7 +79,7 @@ h2 {
   text-align: center;
   align-self: center;
   justify-self: center;
-  font-family: 'Roboto', sans-serif;
+  font-family: var(--body-font);
   margin: 2rem auto;
   font-size: clamp(1rem, 3vmin,1.5rem);
 }
@@ -90,6 +88,7 @@ a {
   color: white;
   padding: 0.5em;
   background-color: green;
-  font-family: 'Cinzel', serif;
+  font-weight: lighter;
+  font-family: var(--title-font);
 }
 </style>

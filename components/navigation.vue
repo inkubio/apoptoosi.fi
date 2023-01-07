@@ -30,16 +30,16 @@ nav {
 }
 
 .nav-button {
-  font-family: 'Cinzel', serif;
+  font-family: var(--title-font);
   text-decoration: none;
   color: black;
   margin: auto 0;
   text-align: center;
   transition: 0.3s;
-  font-size: min(5vmin,1em);
+  font-size: min(5vmin,1.2rem);
 }
 .nav-button:hover {
-  color: green;
+  color: var(--primary);
 }
 #home {
   font-size: min(5vmin,1.5em);

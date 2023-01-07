@@ -11,9 +11,10 @@ export default defineNuxtConfig({
             ],
             link: [
                 {rel: 'preconnect', href: 'https://fonts.googleapis.com'},
+                {rel: 'preconnect', href: 'https://fonts.gstatic.com'},
                 {
                     rel: 'stylesheet',
-                    href: 'https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Roboto:wght@300&display=swap',
+                    href: 'https://fonts.googleapis.com/css2?family=Poppins&display=swap',
                     crossorigin: ''
                 },
                 {rel: "icon", href: 'favicon.png'}
@@ -25,5 +26,6 @@ export default defineNuxtConfig({
             baseURL: 'https://ut70usrx.directus.app/',
         },
     },
+    css: ['@/assets/theme.css']
 })
 

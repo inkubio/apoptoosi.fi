@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="footer">
     <h2>Yhteistyössä</h2>
     <div v-for="company in footer_data.data" class="container">
       <a :href="company.website_url">
@@ -20,8 +20,8 @@ const {data: footer_data} = await useFetch('items/Sponsors', {baseURL: api_base}
 h2  {
   font-size: clamp(1em, 10vmin,2rem);
   text-align: center;
-  font-weight: bold;
-  font-family: 'Cinzel', serif;
+  font-weight: normal;
+  font-family: var(--title-font);
 }
 .container {
   display: grid;
@@ -33,5 +33,8 @@ img {
 }
 a {
   text-align: center;
+}
+#footer {
+  padding: 0 5rem 5rem 5rem;
 }
 </style>
