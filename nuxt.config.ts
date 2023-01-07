@@ -15,7 +15,8 @@ export default defineNuxtConfig({
                     rel: 'stylesheet',
                     href: 'https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Roboto:wght@300&display=swap',
                     crossorigin: ''
-                }
+                },
+                {rel: "icon", href: 'favicon.png'}
             ]
         }
     },

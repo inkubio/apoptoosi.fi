@@ -21,6 +21,7 @@ nav {
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 30rem), 1fr));
   min-height: 3em;
   padding: 0 1em;
+  margin-bottom: 1rem;
 }
 .subnav {
   display: grid;

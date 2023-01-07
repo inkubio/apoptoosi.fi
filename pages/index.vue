@@ -1,6 +1,6 @@
 <template>
   <main>
-    <div id="home-image" :style="{'background-image': `url(${api_base + 'assets/' + page_data.data.front_image}})`}">
+    <div id="home-image" :style="{'background-image': `url(${api_base + 'assets/' + page_data.data.front_image})`}">
       <div class="title-container">
         <h1 id="title">
           {{general_data.data.name}}
