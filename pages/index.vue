@@ -11,14 +11,18 @@
     <nav id="navigation">
       <NuxtLink id="events" to="/events" class="nav-button">Tapahtumat</NuxtLink>
       <NuxtLink id="signup" to="/signup" class="nav-button">Ilmoittautuminen</NuxtLink>
-      <NuxtLink id="about" to="/about" class="nav-button">Yhteystiedot</NuxtLink>
+      <NuxtLink id="contact" to="/contact" class="nav-button">Yhteystiedot</NuxtLink>
     </nav>
-    <div id="content">{{page_data.data.translations[0].event_description}}</div>
+    <div id="content">
+      <Markdown :source="page_data.data.translations[0].event_description"></Markdown>
+    </div>
     <home-footer id="footer"/>
   </main>
 </template>
 
 <script setup>
+import Markdown from 'vue3-markdown-it';
+
 const runtimeConfig = useRuntimeConfig()
 const api_base = runtimeConfig.public.baseURL
 
@@ -28,6 +32,7 @@ const {data: page_data} = await useFetch('items/Homepage', {
   baseURL: api_base,
   query: {"fields":"front_image,translations.*", "deep[translations][_filter][languages_id][_eq]": "fi-FI"}
 })
+
 const {data: general_data} = await useFetch('items/General', {baseURL: api_base})
 </script>
 
@@ -92,7 +97,7 @@ main {
 #signup {
   background-color: #5f5f5f;
 }
-#about {
+#contact {
   background-color: #353535;
 }
 

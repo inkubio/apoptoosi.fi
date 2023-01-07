@@ -23,6 +23,6 @@ export default defineNuxtConfig({
         public: {
             baseURL: 'https://ut70usrx.directus.app/',
         },
-    }
+    },
 })
 
