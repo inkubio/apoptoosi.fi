@@ -14,6 +14,6 @@ export default {
 <style scoped>
 .container {
   min-height: 100dvh;
-  background-color: #ccd7cf;
+  background-color: var(--bg-color);
 }
 </style>
