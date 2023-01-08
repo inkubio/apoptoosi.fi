@@ -35,6 +35,6 @@ a {
   text-align: center;
 }
 #footer {
-  padding: 0 5rem 5rem 5rem;
+  padding-bottom: 2rem;
 }
 </style>
