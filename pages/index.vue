@@ -48,6 +48,7 @@ main {
   background-image: linear-gradient(45deg, rgba(8,195,179,1) 0%, rgba(0,212,255,1) 100%);;
   background-repeat: no-repeat;
   background-size: cover;
+  background-position: center;
 }
 .title-container {
   position: relative;

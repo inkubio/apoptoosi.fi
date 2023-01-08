@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <navigation />
     <slot />
   </div>
@@ -12,5 +12,8 @@ export default {
 </script>
 
 <style scoped>
-
+.container {
+  min-height: 100dvh;
+  background-color: #ccd7cf;
+}
 </style>

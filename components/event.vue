@@ -81,14 +81,14 @@ h2 {
   justify-self: center;
   font-family: var(--body-font);
   margin: 2rem auto;
-  font-size: clamp(1rem, 3vmin,1.5rem);
+  font-size: clamp(0.5rem, 2vmin,1.5rem);
 }
 a {
   text-decoration: none;
   color: white;
   padding: 0.5em;
-  background-color: green;
+  background-color: var(--primary);
   font-weight: lighter;
-  font-family: var(--title-font);
+  font-family: var(--body-font);
 }
 </style>
