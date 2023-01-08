@@ -1,6 +1,6 @@
 <template>
   <div id="container" class="parity" :class="{'parity-right': image_right}">
-    <div class="title" :class="{'title-right': image_right}" :style="{'background-image': `url(${image})`}">
+    <div class="title" :style="{'background-image': `url(${image})`}">
       <h2>{{title}}</h2>
     </div>
     <div class="info">
@@ -40,19 +40,18 @@ console.log(image_right)
 }
 
 .title {
-  width: 100%;
+  width: clamp(300px, 50vmin, 600px);
+  margin: clamp(0rem, 2vmin,2.5rem);
   grid-area: image;
   background-color: black;
   aspect-ratio: 1 / 1;
   background-position: center;
   background-size: cover;
-  border-radius: 0 5rem 5rem 0;
+  border-radius: 25em;
   display: flex;
   flex-flow: column;
   justify-content: center;
-}
-.title-right {
-  border-radius: 5rem 0 0 5rem;
+  justify-self: center;
 }
 
 @media only screen and (max-width: 700px) {
@@ -61,16 +60,12 @@ console.log(image_right)
     grid-template-rows: 1fr 1fr;
     grid-template-areas: "image" "info";
   }
-  .title {
-    border-radius: 0;
-  }
 }
 h2 {
   text-align: center;
-  font-size: clamp(0.5rem, 7vmin,2.5rem);
+  font-size: clamp(1rem, 7vmin,2.5rem);
   color: var(--text-secondary);
   font-family: var(--title-font);
-  margin-bottom: 2em;
 }
 .info {
   padding: 1rem;
@@ -81,7 +76,7 @@ h2 {
   justify-self: center;
   font-family: var(--body-font);
   margin: 2rem auto;
-  font-size: clamp(0.5rem, 2vmin,1.5rem);
+  font-size: clamp(1rem, 3vmin,1.5rem);
 }
 a {
   text-decoration: none;

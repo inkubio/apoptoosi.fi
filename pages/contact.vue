@@ -37,7 +37,7 @@ p {
   font-family: var(--body-font);
   text-align: center;
   margin: 2rem auto;
-  font-size: clamp(1em, 3vmin,1.5rem);
+  font-size: clamp(1rem, 3vmin,1.5rem);
   max-width: 700px;
 }
 address, a {
