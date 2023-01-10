@@ -1,7 +1,9 @@
 <template>
-  <h2>{{page.data.translations[0].title}}</h2>
-  <div id="content">
-    <Markdown :source="page.data.translations[0].description"></Markdown>
+  <div>
+    <h2>{{page.data.translations[0].title}}</h2>
+    <div id="content">
+      <Markdown :source="page.data.translations[0].description"></Markdown>
+    </div>
   </div>
 </template>
 
