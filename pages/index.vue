@@ -121,6 +121,7 @@ main {
   font-family: var(--body-font);
   text-align: center;
   margin: 2rem auto;
+  padding: 0 1rem;
   font-size: clamp(1em, 3vmin,1.5rem);
   max-width: 700px;
 }

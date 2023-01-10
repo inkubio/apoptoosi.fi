@@ -27,7 +27,6 @@ const props = defineProps({
 })
 
 const image_right = computed(() =>props.parity % 2 !== 0)
-console.log(image_right)
 
 const event_date = computed(() => {
   let a = new Date(props.date)
