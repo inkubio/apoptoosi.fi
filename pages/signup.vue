@@ -2,10 +2,7 @@
   <p>Signup</p>
 </template>
 
-<script>
-export default {
-  name: "signup.vue"
-}
+<script setup>
 </script>
 
 <style scoped>

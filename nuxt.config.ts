@@ -23,7 +23,7 @@ export default defineNuxtConfig({
     },
     runtimeConfig: {
         public: {
-            baseURL: 'https://ut70usrx.directus.app/',
+            baseURL: 'https://directus.apoptoosi.fi/',
         },
     },
     css: ['@/assets/theme.css']

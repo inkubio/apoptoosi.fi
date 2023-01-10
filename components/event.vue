@@ -2,10 +2,11 @@
   <div id="container" class="parity" :class="{'parity-right': image_right}">
     <div class="title" :style="{'background-image': `url(${image})`}">
       <h2>{{title}}</h2>
+      <span v-if="date != null">{{event_date}}</span>
     </div>
     <div class="info">
       <p>{{description}}</p>
-      <a :href="signup">Ilmoittaudu</a>
+      <a v-if="signup_enabled" :href="signup">{{signup_text}}</a>
     </div>
   </div>
 </template>
@@ -16,14 +17,22 @@ const api_base = runtimeConfig.public.baseURL
 
 const props = defineProps({
   title: String,
+  date: String,
   description: String,
   image: String,
   signup: String,
+  signup_text: String,
+  signup_enabled: Boolean,
   parity: Number,
 })
 
 const image_right = computed(() =>props.parity % 2 !== 0)
 console.log(image_right)
+
+const event_date = computed(() => {
+  let a = new Date(props.date)
+  return a.getDate() + "." + (a.getMonth()+1)
+})
 
 </script>
 
@@ -62,6 +71,12 @@ console.log(image_right)
   }
 }
 h2 {
+  text-align: center;
+  font-size: clamp(1rem, 7vmin,2.5rem);
+  color: var(--text-secondary);
+  font-family: var(--title-font);
+}
+span {
   text-align: center;
   font-size: clamp(1rem, 7vmin,2.5rem);
   color: var(--text-secondary);

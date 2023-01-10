@@ -1,12 +1,14 @@
 <template>
   <main>
-    <div id="home-image" :style="{'background-image': `url(${api_base + 'assets/' + page_data.data.front_image})`}">
+    <div id="home-image" :style="{'background-image': `url(${api_base + 'assets/' + page.data.hero_image})`}">
       <div class="title-container">
-        <h1 id="title">
-          {{general_data.data.name}}
+        <h1 id="title" v-if="page.data.logo != null">
+          <img :src="`${api_base + 'assets/' + page.data.logo}`" :alt="general.data.event_name">
         </h1>
-        <countdown-timer id="countdown" :event-date="general_data.data.event_date" />
+        <h1 v-else id="title">{{general.data.event_name}}</h1>
+        <countdown-timer id="countdown" :event-date="general.data.event_date" />
       </div>
+      <span v-if="page.data.hero_image_credit != null" id="image_credit">{{page.data.hero_image_credit}}</span>
     </div>
     <nav id="navigation">
       <NuxtLink id="events" to="/events" class="nav-button">Tapahtumat</NuxtLink>
@@ -14,9 +16,9 @@
       <NuxtLink id="contact" to="/contact" class="nav-button">Yhteystiedot</NuxtLink>
     </nav>
     <div id="content">
-      <Markdown :source="page_data.data.translations[0].event_description"></Markdown>
+      <Markdown :source="page.data.translations[0].description"></Markdown>
     </div>
-    <home-footer id="footer"/>
+    <home-footer id="footer" :title="page.data.translations[0].footer_title"/>
   </main>
 </template>
 
@@ -28,12 +30,12 @@ const api_base = runtimeConfig.public.baseURL
 
 definePageMeta({layout: "landingpage",});
 
-const {data: page_data} = await useFetch('items/Homepage', {
+const {data: page} = await useFetch('items/homepage', {
   baseURL: api_base,
-  query: {"fields":"front_image,translations.*", "deep[translations][_filter][languages_id][_eq]": "fi-FI"}
+  query: {"fields":"hero_image,logo,hero_image_credit,translations.*", "deep[translations][_filter][languages_id][_eq]": "fi"}
 })
 
-const {data: general_data} = await useFetch('items/General', {baseURL: api_base})
+const {data: general} = await useFetch('items/general', {baseURL: api_base})
 </script>
 
 <style scoped>
@@ -63,6 +65,18 @@ main {
   font-family: var(--title-font);
   color: var(--title_color);
   margin-bottom: 0;
+}
+#title img {
+  height: clamp(1rem, 25vmin, 15rem);
+}
+
+#image_credit {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  font-size: clamp(0.5rem,1vmin,1rem);
+  opacity: 0.5;
+  color: var(--text-secondary);
 }
 
 #countdown {

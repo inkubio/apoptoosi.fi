@@ -1,8 +1,8 @@
 <template>
   <div id="footer">
-    <h2>Yhteistyössä</h2>
+    <h2>{{ title }}</h2>
     <div v-for="company in footer_data.data" class="container">
-      <a :href="company.website_url">
+      <a :href="company.company_url">
         <img :src="api_base + 'assets/' + company.logo">
       </a>
     </div>
@@ -10,10 +10,15 @@
 </template>
 
 <script setup>
+
+const props = defineProps({
+  title: String
+})
+
 const runtimeConfig = useRuntimeConfig()
 const api_base = runtimeConfig.public.baseURL
 
-const {data: footer_data} = await useFetch('items/Sponsors', {baseURL: api_base})
+const {data: footer_data} = await useFetch('items/sponsors', {baseURL: api_base})
 </script>
 
 <style scoped>

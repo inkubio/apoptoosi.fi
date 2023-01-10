@@ -12,9 +12,9 @@
 const runtimeConfig = useRuntimeConfig()
 const api_base = runtimeConfig.public.baseURL
 
-const {data: page_data} = await useFetch('items/About', {
+const {data: page_data} = await useFetch('items/contact', {
   baseURL: api_base,
-  query: {"fields":"email,translations.*", "deep[translations][_filter][languages_code][_eq]": "fi-FI"}
+  query: {"fields":"email,translations.*", "deep[translations][_filter][languages_code][_eq]": "fi"}
 })
 
 </script>
