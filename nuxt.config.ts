@@ -26,7 +26,7 @@ export default defineNuxtConfig({
         public: {
             baseURL: 'https://directus.apoptoosi.fi/',
             //baseURL: 'http://localhost:8055',
-            apiBase: 'http://localhost:3001',
+            apiBase: 'https://directus.apoptoosi.fi/api/',
         },
     },
     css: ['@/assets/theme.css']

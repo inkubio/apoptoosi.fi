@@ -1,8 +1,8 @@
 <template>
   <div>
     <label :for="field_key">{{name}}{{required ? "*" :""}}</label>
-    <input type="text" :name="field_key" :id="field_key" :placeholder="placeholder"
-           :value="modelValue" @input="$emit('update:modelValue', $event.target.value)">
+    <input :type="field_key === 'email' ? 'email' : 'text'" :name="field_key" :id="field_key" :placeholder="placeholder"
+           :value="modelValue" @input="$emit('update:modelValue', $event.target.value)" :required=required>
   </div>
 </template>
 
@@ -24,7 +24,7 @@ label {
   font-family: var(--body-font);
   font-size: clamp(1rem, 3vmin, 1.2rem);
 }
-input[type=text] {
+input[type=text], input[type=email] {
   border: none;
   font-size: clamp(1rem, 3vmin, 1.2rem);
 }

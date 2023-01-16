@@ -4,7 +4,7 @@
     <div class="options_container">
       <div v-for="choice in choices" class="inline-selection">
         <input type="radio" :id="choice.value" :value="choice.value" :name="'group' + `${field_key}`"
-               @input="$emit('update:modelValue', $event.target.value)"/>
+               @input="$emit('update:modelValue', $event.target.value)" :required=required />
         <label :for="choice.value">{{choice.text === "yes" ? "Kyllä" : "Ei"}}</label>
       </div>
     </div>
