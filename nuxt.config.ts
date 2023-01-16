@@ -25,6 +25,8 @@ export default defineNuxtConfig({
     runtimeConfig: {
         public: {
             baseURL: 'https://directus.apoptoosi.fi/',
+            //baseURL: 'http://localhost:8055',
+            apiBase: 'http://localhost:3001',
         },
     },
     css: ['@/assets/theme.css']
