@@ -5,7 +5,7 @@
       <div v-for="choice in choices" class="inline-selection">
         <input type="radio" :id="choice.value" :value="choice.value" :name="'group' + `${field_key}`"
                @input="$emit('update:modelValue', $event.target.value)" :required=required />
-        <label :for="choice.value">{{choice.text === "yes" ? "Kyllä" : "Ei"}}</label>
+        <label :for="choice.value">{{selection_options(choice.value)}}</label>
       </div>
     </div>
 
@@ -19,6 +19,25 @@ const props = defineProps({
   name: String,
   choices: Array,
 })
+
+const selection_options = (choice_value) => {
+  let text;
+  switch (choice_value) {
+    case "yes":
+      text = "Kyllä";
+      break
+    case "no":
+      text = "Ei";
+      break
+    case "noshots":
+      text = "Alkoholiton snapsi ja avec";
+      break
+    default:
+      text = choice_value
+  }
+  return text
+}
+
 </script>
 
 <style scoped>
