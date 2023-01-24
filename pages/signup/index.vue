@@ -18,6 +18,12 @@
                   :is_invited="selected_signup === 'invite'"
                   :reservation_time="signup_selection_time"
     />
+    <div v-if="selected_signup == null" class="people-container">
+      <h2>{{page.data.translations[0].participants}}</h2>
+      <ul>
+        <li v-for="p in participants.data">{{p.first_name}} {{p.last_name}}</li>
+      </ul>
+    </div>
 
   </div>
 </template>
@@ -40,6 +46,11 @@ const {data: signup_fields} = await useFetch('participants/fields', {
   baseURL: sign_up_api,
 })
 
+const {data: participants} = await useFetch('items/participants', {
+  baseURL: api_base
+})
+
+
 const signup_enabled_invite = ref(false)
 const signup_enabled_common = ref(false)
 
@@ -47,7 +58,11 @@ const selected_signup = ref(null)
 const signup_selection_time =  ref(null)
 
 const select_signup = (selected) => {
-  selected_signup.value = selected
+  if (selected_signup.value === selected) {
+    selected_signup.value = null
+  } else {
+    selected_signup.value = selected
+  }
   signup_selection_time.value = new Date(Date.now()).toISOString()
 }
 
@@ -115,5 +130,22 @@ button:disabled {
 }
 .selected {
   background-color: var(--nav3);
+}
+.people-container {
+  padding: 1rem 0;
+}
+.people-container > h2 {
+  margin-bottom: 1rem;
+}
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+ul > li {
+  text-align: center;
+  font-size: clamp(1em, 3vmin,1.5rem);
+  font-weight: lighter;
+  font-family: var(--body-font);
 }
 </style>
