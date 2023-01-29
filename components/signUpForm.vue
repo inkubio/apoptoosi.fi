@@ -1,6 +1,5 @@
 <template>
   <form class="container" @submit.prevent="handleSubmit">
-    <p>Varaus vanhenee: {{time_until(reservation_time)}}</p>
     <div v-for="field in fields">
 
       <form-text-field v-if="field.meta.interface === 'input'" :field_key="field.field"
