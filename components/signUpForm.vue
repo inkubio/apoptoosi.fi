@@ -1,6 +1,8 @@
 <template>
   <form class="container" @submit.prevent="handleSubmit">
+    <p>Varaus vanhenee: {{time_until(reservation_time)}}</p>
     <div v-for="field in fields">
+
       <form-text-field v-if="field.meta.interface === 'input'" :field_key="field.field"
                        :name="field.meta?.translations[0]?.translation" :required="field.meta.required"
                        :placeholder="field.meta.options?.placeholder"
@@ -31,6 +33,23 @@ const props = defineProps({
 const form = {
   'invited': props.is_invited,
   'reservation_time': props.reservation_time
+}
+
+const time_until = (reservation_time) => {
+  const signup_time = 60*30*1000 // 30 min
+  console.log(reservation_time)
+  const res_date = Date.parse(reservation_time) + signup_time
+  let remaining = res_date - Date.now()
+
+  console.log(remaining)
+  const minute = 60*1000;
+  const second = 1000
+
+  const minutes = Math.floor(remaining/(minute))
+  remaining -= minutes*minute
+  const seconds = Math.floor(remaining/(second))
+
+  return `${minutes}:${seconds}`
 }
 
 const router = useRouter();

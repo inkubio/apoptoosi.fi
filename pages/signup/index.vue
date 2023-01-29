@@ -19,10 +19,11 @@
                   :reservation_time="signup_selection_time"
     />
     <div v-if="selected_signup == null" class="people-container">
+      <p class="spots"> {{participants.data.length}}/{{page.data.spots}}</p>
       <h2>{{page.data.translations[0].participants}}</h2>
-      <ul>
+      <ol>
         <li v-for="p in participants.data">{{p.first_name}} {{p.last_name}}</li>
-      </ul>
+      </ol>
     </div>
 
   </div>
@@ -38,7 +39,7 @@ const sign_up_api = runtimeConfig.public.apiBase
 const {data: page} = await useFetch('items/signup', {
   baseURL: api_base,
   query: {
-    "fields":"event_date,image,sign_up_button,event_url,translations.*",
+    "fields":"event_date,spots,image,sign_up_button,event_url,translations.*",
     "deep[translations][_filter][languages_code][_eq]": "fi"}
 })
 
@@ -47,7 +48,10 @@ const {data: signup_fields} = await useFetch('participants/fields', {
 })
 
 const {data: participants} = await useFetch('items/participants', {
-  baseURL: api_base
+  baseURL: api_base,
+  query: {
+    "sort":"date_created"
+  }
 })
 
 
@@ -137,12 +141,17 @@ button:disabled {
 .people-container > h2 {
   margin-bottom: 1rem;
 }
-ul {
-  list-style: none;
+.spots {
+  text-align: center;
+  font-size: clamp(1em, 3vmin,1.5rem);
+  font-weight: lighter;
+  font-family: var(--body-font);
+}
+ol {
   padding: 0;
   margin: 0;
 }
-ul > li {
+ol > li {
   text-align: center;
   font-size: clamp(1em, 3vmin,1.5rem);
   font-weight: lighter;
