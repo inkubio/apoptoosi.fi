@@ -40,7 +40,7 @@ const {data: page} = await useFetch('items/signup', {
   baseURL: api_base,
   query: {
     "fields":"event_date,spots,image,sign_up_button,event_url,translations.*",
-    "deep[translations][_filter][languages_code][_eq]": "fi"}
+    "deep[translations][_filter][languages_code][_eq]": "fi"},
 })
 
 const {data: signup_fields} = await useFetch('participants/fields', {
@@ -50,7 +50,8 @@ const {data: signup_fields} = await useFetch('participants/fields', {
 const {data: participants} = await useFetch('items/participants', {
   baseURL: api_base,
   query: {
-    "sort":"date_created"
+    "sort":"date_created",
+    "limit":"-1",
   }
 })
 
