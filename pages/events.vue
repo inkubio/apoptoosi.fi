@@ -20,6 +20,7 @@ const api_base = runtimeConfig.public.baseURL
 const {data: events} = await useFetch('items/events', {
   baseURL: api_base,
   query: {
+    "sort":"event_date",
     "fields":"event_date,image,sign_up_button,event_url,translations.*",
     "deep[translations][_filter][languages_code][_eq]": "fi"}
 })
