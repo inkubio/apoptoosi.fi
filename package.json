@@ -8,7 +8,7 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
-    "nuxt": "3.0.0-rc.12"
+    "nuxt": "3.6.1"
   },
   "dependencies": {
     "vue3-markdown-it": "^1.0.10"
