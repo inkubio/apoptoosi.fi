@@ -1,5 +1,5 @@
 <template>
-  <div class="background">
+  <div>
     <h2>{{page_data.data.translations[0].title}}</h2>
     <p>{{page_data.data.translations[0].description}}</p>
     <address>
@@ -20,11 +20,8 @@ const {data: page_data} = await useFetch('items/contact', {
 </script>
 
 <style scoped>
-.background {
-  background-color: #ccd7cf;
-}
 h2 {
-  font-family: var(--title-font);
+  font-family: var(--heading-font);
   text-decoration: none;
   font-weight: normal;
   color: black;

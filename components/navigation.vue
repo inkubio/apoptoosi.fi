@@ -30,7 +30,7 @@ nav {
 }
 
 .nav-button {
-  font-family: var(--title-font);
+  font-family: var(--heading-font);
   text-decoration: none;
   color: black;
   margin: auto 0;

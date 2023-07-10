@@ -6,7 +6,7 @@
           <img :src="`${api_base + 'assets/' + page.data.logo}`" :alt="general.data.event_name">
         </h1>
         <h1 v-else id="title">{{general.data.event_name}}</h1>
-        <p id="countdown">{{general.data.event_date}}</p>
+        <p id="countdown">{{general.data.event_date.split("T")[0]}}</p>
         <!--<countdown-timer id="countdown" :event-date="general.data.event_date" />-->
       </div>
       <span v-if="page.data.hero_image_credit != null" id="image_credit">{{page.data.hero_image_credit}}</span>
@@ -91,7 +91,7 @@ main {
   text-align: center;
   font-size: min(10vmin,4rem);
   font-weight: normal;
-  font-family: var(--title-font);
+  font-family: var(--heading-font);
   color: var(--title_color);
   margin-top: 0;
 }
@@ -106,7 +106,7 @@ main {
   background-color: grey;
   font-size: clamp(1em, 10vmin,2rem);
   padding: clamp(1em, 7vmax, 4em) 0;
-  font-family: var(--title-font);
+  font-family: var(--heading-font);
   font-weight: lighter;
   text-align: center;
   transition: 0.3s;
