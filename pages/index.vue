@@ -6,7 +6,8 @@
           <img :src="`${api_base + 'assets/' + page.data.logo}`" :alt="general.data.event_name">
         </h1>
         <h1 v-else id="title">{{general.data.event_name}}</h1>
-        <countdown-timer id="countdown" :event-date="general.data.event_date" />
+        <p id="countdown">{{general.data.event_date}}</p>
+        <!--<countdown-timer id="countdown" :event-date="general.data.event_date" />-->
       </div>
       <span v-if="page.data.hero_image_credit != null" id="image_credit">{{page.data.hero_image_credit}}</span>
     </div>
@@ -36,6 +37,12 @@ const {data: page} = await useFetch('items/homepage', {
 })
 
 const {data: general} = await useFetch('items/general', {baseURL: api_base})
+
+function formatDate(date){
+  let d = Date.parse(date)
+  return d.getDay() + "." + d.getMonth() + 1 + "." + d.getFullYear() + "."
+}
+
 </script>
 
 <style scoped>
