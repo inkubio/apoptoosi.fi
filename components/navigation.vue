@@ -1,6 +1,6 @@
 <template>
   <nav>
-    <NuxtLink id="home" to="/" class="nav-button">Apoptoosi XIX</NuxtLink>
+    <NuxtLink id="home" to="/" class="nav-button">Apoptoosi XX</NuxtLink>
     <div class="subnav">
       <NuxtLink to="/events" class="nav-button">Tapahtumat</NuxtLink>
       <NuxtLink to="/signup" class="nav-button">Ilmoittautuminen</NuxtLink>
@@ -44,6 +44,7 @@ nav {
 #home {
   font-size: min(5vmin,1.5em);
   text-align: left;
+  font-family: var(--title-font);
 }
 .router-link-active {
   font-weight: bold;
