@@ -14,7 +14,7 @@ name: Deploy web app to Azure Static Web Apps
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "master", "testing" ]
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches: [ "master" ]
@@ -54,6 +54,7 @@ jobs:
           app_artifact_location: ${{ env.APP_ARTIFACT_LOCATION }}
           app_build_command: "npm run generate"
           skip_api_build: true
+          production_branch: "master"
           ###### End of Repository/Build Configurations ######
 
   close_pull_request_job:
