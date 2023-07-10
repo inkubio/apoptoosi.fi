@@ -1,5 +1,13 @@
 <template>
-  <div id="container" class="parity" :class="{'parity-right': image_right}">
+  <div id="container" class="parity">
+    <svg class="svg">
+      <clipPath id="shape" clipPathUnits="objectBoundingBox">
+        <path
+            d="M0.502,0 C0.508,0.115,0.564,0.161,0.763,0.264 C0.961,0.367,1,0.419,1,0.506 C0.999,0.593,0.897,0.66,0.767,0.732 C0.635,0.806,0.502,0.865,0.502,1 C0.503,0.863,0.372,0.809,0.265,0.743 C0.131,0.669,0,0.591,0.002,0.505 C0.004,0.418,0.071,0.354,0.242,0.264 C0.42,0.171,0.508,0.107,0.502,0">
+
+        </path>
+      </clipPath>
+    </svg>
     <div class="title" :style="{'background-image': `url(${image})`}">
       <h2>{{title}}</h2>
       <span v-if="date != null">{{event_date}}</span>
@@ -30,7 +38,7 @@ const image_right = computed(() =>props.parity % 2 !== 0)
 
 const event_date = computed(() => {
   let a = new Date(props.date)
-  return a.getDate() + "." + (a.getMonth()+1)
+  return a.getDate() + "." + (a.getMonth()+1) + "."
 })
 
 </script>
@@ -48,18 +56,19 @@ const event_date = computed(() => {
 }
 
 .title {
-  width: clamp(300px, 50vmin, 600px);
+  width: clamp(300px, 50vmin, 400px);
   margin: clamp(0rem, 2vmin,2.5rem);
   grid-area: image;
   background-color: black;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 0.55;
   background-position: center;
   background-size: cover;
-  border-radius: 25em;
+  clip-path: url("#shape");
   display: flex;
   flex-flow: column;
   justify-content: center;
   justify-self: center;
+
 }
 
 @media only screen and (max-width: 700px) {
