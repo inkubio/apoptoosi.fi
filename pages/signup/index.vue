@@ -93,7 +93,7 @@ onUnmounted(() => {
 
 <style scoped>
 h2 {
-  font-family: var(--title-font);
+  font-family: var(--heading-font);
   text-decoration: none;
   font-weight: normal;
   color: black;

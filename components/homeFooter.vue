@@ -26,7 +26,7 @@ h2  {
   font-size: clamp(1em, 10vmin,2rem);
   text-align: center;
   font-weight: normal;
-  font-family: var(--title-font);
+  font-family: var(--heading-font);
 }
 .container {
   display: grid;

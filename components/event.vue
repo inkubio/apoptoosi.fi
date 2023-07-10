@@ -1,13 +1,13 @@
 <template>
-  <div id="container" class="parity">
-    <svg class="svg">
-      <clipPath id="shape" clipPathUnits="objectBoundingBox">
-        <path
-            d="M0.502,0 C0.508,0.115,0.564,0.161,0.763,0.264 C0.961,0.367,1,0.419,1,0.506 C0.999,0.593,0.897,0.66,0.767,0.732 C0.635,0.806,0.502,0.865,0.502,1 C0.503,0.863,0.372,0.809,0.265,0.743 C0.131,0.669,0,0.591,0.002,0.505 C0.004,0.418,0.071,0.354,0.242,0.264 C0.42,0.171,0.508,0.107,0.502,0">
+  <svg width="0" height="0">
+    <clipPath id="shape" clipPathUnits="objectBoundingBox">
+      <path
+          d="M0.502,0 C0.508,0.115,0.564,0.161,0.763,0.264 C0.961,0.367,1,0.419,1,0.506 C0.999,0.593,0.897,0.66,0.767,0.732 C0.635,0.806,0.502,0.865,0.502,1 C0.503,0.863,0.372,0.809,0.265,0.743 C0.131,0.669,0,0.591,0.002,0.505 C0.004,0.418,0.071,0.354,0.242,0.264 C0.42,0.171,0.508,0.107,0.502,0">
 
-        </path>
-      </clipPath>
-    </svg>
+      </path>
+    </clipPath>
+  </svg>
+  <div id="container" class="parity">
     <div class="title" :style="{'background-image': `url(${image})`}">
       <h2>{{title}}</h2>
       <span v-if="date != null">{{event_date}}</span>
@@ -72,23 +72,23 @@ const event_date = computed(() => {
 }
 
 @media only screen and (max-width: 700px) {
-  .parity {
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr;
-    grid-template-areas: "image" "info";
+  #container {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
   }
 }
 h2 {
   text-align: center;
   font-size: clamp(1rem, 7vmin,2.5rem);
   color: var(--text-secondary);
-  font-family: var(--title-font);
+  font-family: var(--heading-font);
 }
 span {
   text-align: center;
   font-size: clamp(1rem, 7vmin,2.5rem);
   color: var(--text-secondary);
-  font-family: var(--title-font);
+  font-family: var(--heading-font);
 }
 .info {
   padding: 1rem;
@@ -108,5 +108,9 @@ a {
   background-color: var(--primary);
   font-weight: lighter;
   font-family: var(--body-font);
+}
+svg {
+  width: 0;
+  height: 0;
 }
 </style>

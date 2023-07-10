@@ -1,23 +1,37 @@
 @font-face {
-    font-family: "Playfair Display";
-    src: local("Playfair Display"),     url(assets/PlayfairDisplay.ttf) format("truetype");}
+    font-family: "Broadmoor";
+    src: local("Broadmoor"), url(fonts/Broadmoor_bold.otf) format("opentype");
+    font-weight: normal;
+    font-style: normal;
+}
 
+@font-face {
+    font-family: "Avenir";
+    src: local("Avenir"), url(fonts/AvenirLTStd-Roman.otf) format("opentype");
+    font-weight: normal;
+    font-style: normal;
+}
 
+@font-face {
+    font-family: "BonvenoCF";
+    src: local("BonvenoCF"), url(fonts/BonvenoCF-Light.otf) format("opentype");
+}
 
 :root  {
     --title_color: #101010;
 
     --text-secondary: #f0f0f0;
 
-    --nav1: #0E3B12;
-    --nav2: #92AB9A;
-    --nav3: #4D86CF;
+    --nav1: #c08C38;
+    --nav2: var(--secondary);
+    --nav3: #102542;
 
-    --bg-color: #ccd7cf;
+    --bg-color: #f7d6c7;
 
-    --primary: #006015;
-    --secondary: #84B2ED;
+    --primary: #157359;
+    --secondary: #004a33;
 
-    --body-font: 'Poppins', sans-serif;
-    --title-font: 'Playfair Display', serif;
+    --body-font: 'Avenir', sans-serif;
+    --title-font: 'Broadmoor', serif;
+    --heading-font: 'BonvenoCF', serif;
 }
