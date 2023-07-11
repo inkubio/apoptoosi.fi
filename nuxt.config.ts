@@ -5,7 +5,7 @@ export default defineNuxtConfig({
         pageTransition: {name: 'page', mode: 'out-in'},
         layoutTransition: {name: 'layout', mode: 'out-in'},
         head: {
-            title: 'Apoptoosi XIX',
+            title: 'Apoptoosi',
             meta: [
                 {name: 'description', content: 'Inkubion vuosijuhlien Apoptoosin nettisivut'},
                 {name: "viewport", content: 'width=device-width, initial-scale=1'},
@@ -18,7 +18,7 @@ export default defineNuxtConfig({
                     href: 'https://fonts.googleapis.com/css2?family=Poppins&display=swap',
                     crossorigin: ''
                 },
-                {rel: "icon", href: 'favicon.png'}
+                {rel: "icon", href: 'favicon.svg'}
             ]
         }
     },
