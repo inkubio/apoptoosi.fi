@@ -9,10 +9,10 @@
   </svg>
   <div id="container" class="parity">
     <div class="title" :style="{'background-image': `url(${image})`}">
-      <h2>{{title}}</h2>
       <span v-if="date != null">{{event_date}}</span>
     </div>
     <div class="info">
+      <h2>{{title}}</h2>
       <p>{{description}}</p>
       <a v-if="signup_enabled" :href="signup">{{signup_text}}</a>
     </div>
@@ -81,7 +81,7 @@ const event_date = computed(() => {
 h2 {
   text-align: center;
   font-size: clamp(1rem, 7vmin,2.5rem);
-  color: var(--text-secondary);
+  color: var(--title_color);
   font-family: var(--heading-font);
 }
 span {
