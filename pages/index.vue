@@ -13,7 +13,7 @@
     </div>
     <nav id="navigation">
       <NuxtLink id="events" to="/events" class="nav-button">Tapahtumat</NuxtLink>
-      <NuxtLink id="signup" to="/signup" class="nav-button">Ilmoittautuminen</NuxtLink>
+      <!--<NuxtLink id="signup" to="/signup" class="nav-button disabled" >Ilmoittautuminen</NuxtLink>-->
       <NuxtLink id="contact" to="/contact" class="nav-button">Yhteystiedot</NuxtLink>
     </nav>
     <div id="content">

@@ -86,9 +86,11 @@ h2 {
 }
 span {
   text-align: center;
-  font-size: clamp(1rem, 7vmin,2.5rem);
+  font-size: 3rem;
   color: var(--text-secondary);
   font-family: var(--heading-font);
+  -webkit-text-stroke: 1px var(--title_color); /* Outline color and width (webkit browsers) */
+  text-stroke: 1px var(--title_color);
 }
 .info {
   padding: 1rem;

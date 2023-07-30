@@ -3,7 +3,7 @@
     <NuxtLink id="home" to="/" class="nav-button">Apoptoosi XX</NuxtLink>
     <div class="subnav">
       <NuxtLink to="/events" class="nav-button">Tapahtumat</NuxtLink>
-      <NuxtLink to="/signup" class="nav-button">Ilmoittautuminen</NuxtLink>
+      <!--<NuxtLink to="/signup" class="nav-button">Ilmoittautuminen</NuxtLink>-->
       <NuxtLink to="/contact" class="nav-button">Yhteystiedot</NuxtLink>
     </div>
   </nav>
