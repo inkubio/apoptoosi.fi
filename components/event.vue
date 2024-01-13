@@ -8,7 +8,9 @@
     </clipPath>
   </svg>
   <div id="container" class="parity">
-    <div class="title" :style="{'background-image': `url(${image})`}">
+    <div class="title"
+         :style="{'background-image': `url(${image})`}"
+         :class="Date.now() < new Date(date).getTime() ? null: 'past_event'" >
       <span v-if="date != null">{{event_date}}</span>
     </div>
     <div class="info">
@@ -53,6 +55,9 @@ const event_date = computed(() => {
 }
 .parity-right {
   grid-template-areas: "info image";
+}
+.past_event {
+  filter: grayscale(1);
 }
 
 .title {
