@@ -26,7 +26,7 @@
     />
     <div id="participant-container" v-else>
       <h3>Osallistujat</h3>
-      <p class="spots"> {{participants_count[0].count}}/{{page.spots}}</p>
+      <p class="spots">Ilmoittautuneita: {{participants_count[0].count}}</p>
       <ol>
         <li v-for="p in participants">{{p.first_name}} {{p.last_name}}</li>
       </ol>
