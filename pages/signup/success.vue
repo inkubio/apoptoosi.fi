@@ -3,19 +3,20 @@
     <p>{{page.translations[0].success_text}}</p>
     <p>Ilmoittauduit seuraavilla tiedoilla:</p>
     <ul>
-      <li>Kiintiö: {{ quota($route.query.quota) }}</li>
-      <li>Nimi: {{$route.query.first_name}} {{$route.query.last_name}}</li>
-      <li>Sähköposti: {{$route.query.email}}</li>
-      <li>Opiskeluiden aloitusvuosi: {{$route.query.fuksivuosi}}</li>
-      <li>Lipputyyppi: {{ticket_type($route.query.ticket_type)}}</li>
-      <li>Erityisruokavaliot: {{$route.query.diet ?? "-"}}</li>
-      <li>Pääruoka: {{main_course($route.query.main_course)}}</li>
-      <li>Alkoholi: {{alcohol($route.query.alcohol)}}</li>
-      <li>Avecin nimi: {{$route.query.avec ?? "-"}}</li>
-      <li>Pöytäseuruetoive: {{$route.query.table_group ?? "-"}}</li>
-      <li>Edustamani taho: {{$route.query.organisation ?? "-"}}</li>
-      <li>Esitän tervehdyksen cocktailtilaisuudessa: {{human_bool($route.query.gift)}}</li>
-      <li>Ostan sillislipun: {{human_bool($route.query.sillis)}}</li>
+      <li><b>Kiintiö</b>: {{ quota($route.query.quota) }}</li>
+      <li><b>Nimi</b>: {{$route.query.first_name}} {{$route.query.last_name}}</li>
+      <li><b>Nimeni saa näyttää julkisessa osallistujalistassa</b>: {{human_bool($route.query.public_name)}}</li>
+      <li><b>Sähköposti</b>: {{$route.query.email}}</li>
+      <li><b>Opiskeluiden aloitusvuosi</b>: {{$route.query.fuksivuosi}}</li>
+      <li><b>Lipputyyppi</b>: {{ticket_type($route.query.ticket_type)}}</li>
+      <li><b>Erityisruokavaliot</b>: {{$route.query.diet ?? "-"}}</li>
+      <li><b>Pääruoka</b>: {{main_course($route.query.main_course)}}</li>
+      <li><b>Alkoholi</b>: {{alcohol($route.query.alcohol)}}</li>
+      <li><b>Avecin nimi</b>: {{$route.query.avec ?? "-"}}</li>
+      <li><b>Pöytäseuruetoive</b>: {{$route.query.table_group ?? "-"}}</li>
+      <li><b>Edustamani taho</b>: {{$route.query.organisation ?? "-"}}</li>
+      <li><b>Esitän tervehdyksen cocktailtilaisuudessa</b>: {{human_bool($route.query.gift)}}</li>
+      <li><b>Ostan sillislipun</b>: {{human_bool($route.query.sillis)}}</li>
     </ul>
   </div>
 </template>
@@ -94,6 +95,7 @@ p {
   max-width: 700px;
 }
 ul {
+  list-style: none;
   display: flex;
   flex-flow: column;
   align-items: center;

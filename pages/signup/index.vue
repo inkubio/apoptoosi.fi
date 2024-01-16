@@ -22,14 +22,22 @@
 
     <sign-up-form
         v-if="quota.length !== 0"
-        :fields="form_fields"
         :quota="quota"
     />
+    <div id="participant-container" v-else>
+      <h3>Osallistujat</h3>
+      <p class="spots"> {{participants_count[0].count}}/{{page.spots}}</p>
+      <ol>
+        <li v-for="p in participants">{{p.first_name}} {{p.last_name}}</li>
+      </ol>
+    </div>
   </div>
 </template>
 
 <script setup>
-const { $directus, $readItems, $readFieldsByCollection, $mdRenderer} = useNuxtApp()
+import {aggregate} from "@directus/sdk";
+
+const { $directus, $readItems, $mdRenderer} = useNuxtApp()
 
 const quota = useState('quota', () => "")
 
@@ -49,11 +57,26 @@ const {data: page} = await useAsyncData('signup', () => {
     })
   )
 })
-const {data: form_fields} = await useAsyncData('form_fields', () => {
+
+const {data: participants} = await useAsyncData('participants', () => {
   return $directus.request(
-      $readFieldsByCollection('participants')
+      $readItems('participants', {
+        fields: ["*"],
+      })
   )
 })
+
+const {data: participants_count} = await useAsyncData('participants_count', () => {
+  return $directus.request(
+      aggregate('participants', {
+        aggregate: {"count": "*"},
+        query: {
+          access_token: "Cbuc_3lBpP_kz43ddMps3VV2HBarPqh9",
+        }
+      })
+  )
+})
+console.log(participants_count)
 
 const select_ticket_type = (selected) => {
   quota.value = selected === quota.value ? "" : selected
@@ -61,7 +84,7 @@ const select_ticket_type = (selected) => {
 </script>
 
 <style scoped>
-h2 {
+h2, h3 {
   font-family: var(--heading-font);
   text-decoration: none;
   font-weight: normal;

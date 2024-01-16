@@ -20,6 +20,21 @@
     <label for="lastname">Sukunimi*</label>
     <input type="text" id="lastname" name="lastname" v-model="form.last_name" placeholder="Teekkari" required>
 
+    <fieldset>
+      <legend>Nimeni saa näyttää julkisessa osallistujalistassa*</legend>
+      <div class="radio_select">
+        <label for="public_name_yes">
+          <input type="radio" id="public_name_yes" value=true name="public_name" v-model="form.public_name" required>
+          Kyllä
+        </label>
+        <label for="public_name_no">
+          <input type="radio" id="public_name_no" value=false name="public_name" v-model="form.public_name">
+          Ei
+        </label>
+      </div>
+    </fieldset>
+
+
     <label for="email">Sähköposti*</label>
     <input type="email" id="email" name="email" v-model="form.email" placeholder="teemu.teekkari@esimerkki.fi" required>
 
@@ -125,7 +140,6 @@
 const { $directus, $createItem} = useNuxtApp()
 
 const props = defineProps({
-  fields: Object,
   quota: String,
   reservation_time: String,
 })
