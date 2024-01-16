@@ -1,46 +1,57 @@
 <template>
   <main>
-    <div id="home-image" :style="{'background-image': `url(${api_base + 'assets/' + page.data.hero_image})`}">
+    <div id="home-image" :style="{'background-image': `url(${$directus.url}assets/${page.hero_image}`}">
       <div class="title-container">
-        <h1 id="title" v-if="page.data.logo != null">
-          <img :src="`${api_base + 'assets/' + page.data.logo}`" :alt="general.data.event_name">
+        <h1 id="title" v-if="page.logo != null">
+          <img :src="`${$directus.url}assets/${page.logo}`" :alt="general.event_name">
         </h1>
-        <h1 v-else id="title">{{general.data.event_name}}</h1>
-        <p id="countdown">{{general.data.event_date.split("T")[0]}}</p>
-        <!--<countdown-timer id="countdown" :event-date="general.data.event_date" />-->
+        <h1 v-else id="title">{{general.event_name}}</h1>
+        <p id="countdown">{{formatDate(general.event_date)}}</p>
+        <!--<countdown-timer id="countdown" :event-date="general.event_date" />-->
       </div>
-      <span v-if="page.data.hero_image_credit != null" id="image_credit">{{page.data.hero_image_credit}}</span>
+      <span v-if="page.hero_image_credit != null" id="image_credit">{{page.hero_image_credit}}</span>
     </div>
     <nav id="navigation">
       <NuxtLink id="events" to="/events" class="nav-button">Tapahtumat</NuxtLink>
-      <!--<NuxtLink id="signup" to="/signup" class="nav-button disabled" >Ilmoittautuminen</NuxtLink>-->
+      <NuxtLink id="signup" to="/signup" class="nav-button disabled" >Ilmoittautuminen</NuxtLink>
       <NuxtLink id="contact" to="/contact" class="nav-button">Yhteystiedot</NuxtLink>
     </nav>
-    <div id="content">
-      <Markdown :source="page.data.translations[0].description"></Markdown>
-    </div>
-    <home-footer id="footer" :title="page.data.translations[0].footer_title"/>
+    <div id="content" v-html="$mdRenderer.render(page.translations[0].description)" />
+    <home-footer id="footer" :title="page.translations[0].footer_title"/>
   </main>
 </template>
 
 <script setup>
-import Markdown from 'vue3-markdown-it';
-
-const runtimeConfig = useRuntimeConfig()
-const api_base = runtimeConfig.public.baseURL
+const { $directus, $readItems } = useNuxtApp()
 
 definePageMeta({layout: "landingpage",});
 
-const {data: page} = await useFetch('items/homepage', {
-  baseURL: api_base,
-  query: {"fields":"hero_image,logo,hero_image_credit,translations.*", "deep[translations][_filter][languages_id][_eq]": "fi"}
+const {data: page} = await useAsyncData('page', () => {
+  return $directus.request(
+      $readItems('homepage', {
+        fields: ["hero_image", "logo", "hero_image_credit", {'translations': ['*']}],
+        deep: {
+          translations: {
+            _filter: {
+              languages_id: {
+                _eq: "fi"
+              }
+            }
+          }
+        }
+      })
+  )
 })
 
-const {data: general} = await useFetch('items/general', {baseURL: api_base})
+const {data: general} = await useAsyncData('general', () => {
+  return $directus.request(
+      $readItems('general')
+  )
+})
 
 function formatDate(date){
-  let d = Date.parse(date)
-  return d.getDay() + "." + d.getMonth() + 1 + "." + d.getFullYear() + "."
+  let d = new Date(Date.parse(date))
+  return d.getDate() + "." + (d.getMonth() + 1) + "." + d.getFullYear()
 }
 
 </script>

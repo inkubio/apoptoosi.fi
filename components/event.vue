@@ -54,6 +54,9 @@ const event_date = computed(() => {
 .parity-right {
   grid-template-areas: "info image";
 }
+.past_event {
+  filter: grayscale(1);
+}
 
 .title {
   width: clamp(300px, 50vmin, 400px);

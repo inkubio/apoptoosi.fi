@@ -1,8 +1,8 @@
 <template>
-  <ul v-if="events.data.length > 0">
-    <li class="events" v-for="(event, index) in events.data" :key="index">
+  <ul v-if="events.length > 0">
+    <li class="events" v-for="(event, index) in events" :key="index">
       <event :title="event.translations[0].name" :description="event.translations[0].description"
-             :image="event.image != null ? `${api_base + 'assets/' + event.image}` : ''"
+             :image="event.image != null ? `${$directus.url}assets/${event.image}` : ''"
              :signup="event.event_url"
              :signup_text="event.translations[0].sign_up_button_text"
              :signup_enabled="event.sign_up_button"
@@ -14,17 +14,25 @@
 </template>
 
 <script setup>
-const runtimeConfig = useRuntimeConfig()
-const api_base = runtimeConfig.public.baseURL
+const { $directus, $readItems } = useNuxtApp()
 
-const {data: events} = await useFetch('items/events', {
-  baseURL: api_base,
-  query: {
-    "sort":"event_date",
-    "fields":"event_date,image,sign_up_button,event_url,translations.*",
-    "deep[translations][_filter][languages_code][_eq]": "fi"}
+const {data: events} = await useAsyncData('events', () => {
+  return $directus.request(
+      $readItems('events', {
+        fields: ["event_date", "image", "sign_up_button", "event_url", {"translations": ['*']}],
+        sort: ["event_date"],
+        deep: {
+          translations: {
+            _filter: {
+              languages_code: {
+                _eq: "fi"
+              }
+            }
+          }
+        }
+      })
+  )
 })
-
 </script>
 
 <style scoped>

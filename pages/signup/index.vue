@@ -1,98 +1,90 @@
 <template>
   <div>
-    <h2>{{page.data.translations[0].title}}</h2>
-    <div id="content">
-      <Markdown :source="page.data.translations[0].description"></Markdown>
-    </div>
+    <h2>{{page.translations[0].title}}</h2>
+    <div id="content" v-html="$mdRenderer.render(page.translations[0].description)" />
     <div id="button-container">
-      <button :disabled="!signup_enabled_invite" @click="select_signup('invite')"
-              :class="{selected: selected_signup === 'invite'}">
-        {{page.data.translations[0].sign_up_invitee_button_text}}
-      </button>
-      <button :disabled="!signup_enabled_common" @click="select_signup('common')"
-              :class="{selected: selected_signup === 'common'}">
-        {{page.data.translations[0].sign_up_common_button_text}}
-      </button>
-    </div>
-    <sign-up-form :fields="signup_fields" v-if="selected_signup != null"
-                  :is_invited="selected_signup === 'invite'"
-                  :reservation_time="signup_selection_time"
-    />
-    <div v-if="selected_signup == null" class="people-container">
-      <p class="spots"> {{participants.data.length}}/{{page.data.spots}}</p>
-      <h2>{{page.data.translations[0].participants}}</h2>
-      <ol>
-        <li v-for="p in participants.data">{{p.first_name}} {{p.last_name}}</li>
-      </ol>
+      <button
+          :ref="quota"
+          :disabled="false"
+          :class="{selected: quota === 'invitee'}"
+          @click="select_ticket_type('invitee')">{{page.translations[0].sign_up_invitee_button_text}}</button>
+      <button
+          :ref="quota"
+          :disabled="true"
+          :class="{selected: quota === 'student'}"
+          @click="select_ticket_type('student')">{{page.translations[0].sign_up_common_button_text}}</button>
+      <button
+          :ref="quota"
+          :disabled="true"
+          :class="{selected: quota === 'alumni'}"
+          @click="select_ticket_type('alumni')">{{page.translations[0].sign_up_alumni_button_text}}</button>
     </div>
 
+    <sign-up-form
+        v-if="quota.length !== 0"
+        :quota="quota"
+    />
+    <div id="participant-container" v-else>
+      <h3>Osallistujat</h3>
+      <p class="spots">Ilmoittautuneita: {{participants_count[0].count}}</p>
+      <ol>
+        <li v-for="p in participants">{{p.first_name}} {{p.last_name}}</li>
+      </ol>
+    </div>
   </div>
 </template>
 
 <script setup>
-import Markdown from 'vue3-markdown-it';
+import {aggregate} from "@directus/sdk";
 
-const runtimeConfig = useRuntimeConfig()
-const api_base = runtimeConfig.public.baseURL
-const sign_up_api = runtimeConfig.public.apiBase
+const { $directus, $readItems, $mdRenderer} = useNuxtApp()
 
-const {data: page} = await useFetch('items/signup', {
-  baseURL: api_base,
-  query: {
-    "fields":"event_date,spots,image,sign_up_button,event_url,translations.*",
-    "deep[translations][_filter][languages_code][_eq]": "fi"},
+const quota = useState('quota', () => "")
+
+const {data: page} = await useAsyncData('signup', () => {
+  return $directus.request(
+    $readItems('signup', {
+      fields: ["*", "*.*"],
+      deep: {
+        translations: {
+          _filter: {
+            languages_code: {
+              _eq: "fi"
+            }
+          }
+        }
+      }
+    })
+  )
 })
 
-const {data: signup_fields} = await useFetch('participants/fields', {
-  baseURL: sign_up_api,
+const {data: participants} = await useAsyncData('participants', () => {
+  return $directus.request(
+      $readItems('participants', {
+        fields: ["*"],
+      })
+  )
 })
 
-const {data: participants} = await useFetch('items/participants', {
-  baseURL: api_base,
-  query: {
-    "sort":"date_created",
-    "limit":"-1",
-  }
+const {data: participants_count} = await useAsyncData('participants_count', () => {
+  return $directus.request(
+      aggregate('participants', {
+        aggregate: {"count": "*"},
+        query: {
+          access_token: "Cbuc_3lBpP_kz43ddMps3VV2HBarPqh9",
+        }
+      })
+  )
 })
+console.log(participants_count)
 
-
-const signup_enabled_invite = ref(false)
-const signup_enabled_common = ref(false)
-
-const selected_signup = ref(null)
-const signup_selection_time =  ref(null)
-
-const select_signup = (selected) => {
-  if (selected_signup.value === selected) {
-    selected_signup.value = null
-  } else {
-    selected_signup.value = selected
-  }
-  signup_selection_time.value = new Date(Date.now()).toISOString()
+const select_ticket_type = (selected) => {
+  quota.value = selected === quota.value ? "" : selected
 }
-
-let enable_sign_up
-
-onMounted(() => {
-  enable_sign_up = new EventSource(sign_up_api +'signup/enable');
-
-  enable_sign_up.onmessage = (e) => {
-    let d = JSON.parse(e.data);
-    signup_enabled_invite.value = d?.invited || signup_enabled_invite.value
-    signup_enabled_common.value = d?.common || signup_enabled_common.value
-  };
-})
-
-onUnmounted(() => {
-  enable_sign_up.close()
-})
-
-
-
 </script>
 
 <style scoped>
-h2 {
+h2, h3 {
   font-family: var(--heading-font);
   text-decoration: none;
   font-weight: normal;
@@ -110,6 +102,20 @@ h2 {
   font-size: clamp(1em, 3vmin,1.5rem);
   max-width: 700px;
 }
+
+input[type="radio"] {
+  text-decoration: none;
+  box-shadow: none;
+  color: white;
+  padding: 0.5em;
+  background-color: var(--secondary);
+  font-size: clamp(1em, 3vmin,1.5rem);
+  font-weight: lighter;
+  font-family: var(--body-font);
+  border: none;
+  transition: 0.3s;
+}
+
 button {
   text-decoration: none;
   box-shadow: none;
@@ -136,7 +142,7 @@ button:disabled {
 .selected {
   background-color: var(--nav3);
 }
-.people-container {
+#participant-container {
   padding: 1rem 0;
 }
 .people-container > h2 {

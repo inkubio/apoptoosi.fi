@@ -1,20 +1,31 @@
 <template>
   <div>
-    <h2>{{page_data.data.translations[0].title}}</h2>
-    <p>{{page_data.data.translations[0].description}}</p>
+    <h2>{{page.translations[0].title}}</h2>
+    <div id="content" v-html="$mdRenderer.render(page.translations[0].description)" />
     <address>
-      <a :href="`mailto:${page_data.data.email}`">{{page_data.data.email}}</a>
+      <a :href="`mailto:${page.email}`">{{page.email}}</a>
     </address>
   </div>
 </template>
 
 <script setup>
-const runtimeConfig = useRuntimeConfig()
-const api_base = runtimeConfig.public.baseURL
+const { $directus, $readItems } = useNuxtApp()
 
-const {data: page_data} = await useFetch('items/contact', {
-  baseURL: api_base,
-  query: {"fields":"email,translations.*", "deep[translations][_filter][languages_code][_eq]": "fi"}
+const {data: page} = await useAsyncData('contact', () => {
+  return $directus.request(
+      $readItems('contact', {
+        fields: ["email", {"translations": ['*']}],
+        deep: {
+          translations: {
+            _filter: {
+              languages_code: {
+                _eq: "fi"
+              }
+            }
+          }
+        }
+      })
+  )
 })
 
 </script>
@@ -30,11 +41,12 @@ h2 {
   transition: 0.3s;
   font-size: min(5vmin,2rem);
 }
-p {
+#content {
   font-family: var(--body-font);
   text-align: center;
   margin: 2rem auto;
-  font-size: clamp(1rem, 3vmin,1.5rem);
+  padding: 0 1rem;
+  font-size: clamp(1em, 3vmin,1.5rem);
   max-width: 700px;
 }
 address, a {
