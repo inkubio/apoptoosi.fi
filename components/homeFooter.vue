@@ -24,7 +24,6 @@ const {data: footer} = await useAsyncData("sponsors", () => {
       })
   )
 })
-console.log(footer)
 </script>
 
 <style scoped>

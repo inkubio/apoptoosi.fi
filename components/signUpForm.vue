@@ -23,33 +23,23 @@
     <label for="email">Sähköposti*</label>
     <input type="email" id="email" name="email" v-model="form.email" placeholder="teemu.teekkari@esimerkki.fi" required>
 
-    <label for="fuksivuosi">Fuksivuosi*</label>
+    <label for="fuksivuosi">Opiskelujen aloitusvuosi*</label>
     <input type="number" id="fuksivuosi" name="fuksivuosin" v-model="form.fuksivuosi" placeholder="2018" required>
 
     <fieldset>
-      <legend>Alumni vai opiskelija*</legend>
+      <legend>Lipputyyppi</legend>
       <div class="radio_select">
-        <label for="alumni_yes">
-          <input type="radio" id="alumni_yes" value="student" name="alumni" v-model="form.participant_type" required>
+        <label for="student">
+          <input type="radio" id="student" value="student" name="ticket_type" v-model="form.ticket_type" required>
           Opiskelija
         </label>
-        <label for="alumni_no">
-          <input type="radio" id="alumni_no" value="alumni" name="alumni" v-model="form.participant_type">
+        <label for="alumni">
+          <input type="radio" id="alumni" value="alumni" name="ticket_type" v-model="form.ticket_type">
           Alumni
         </label>
-      </div>
-    </fieldset>
-
-    <fieldset>
-      <legend>Ostan kannatuslipun*</legend>
-      <div class="radio_select">
-        <label for="support_yes">
-          <input type="radio" id="support_yes" value="yes" name="support_ticket" v-model="form.supporter_ticket" required>
-          Kyllä
-        </label>
-        <label for="support_no">
-          <input type="radio" id="support_no" value="no" name="support_ticket" v-model="form.supporter_ticket" required>
-          Ei
+        <label for="supporter">
+          <input type="radio" id="supporter" value="supporter" name="ticket_type" v-model="form.ticket_type">
+          Kannatuslippu
         </label>
       </div>
     </fieldset>
@@ -95,8 +85,11 @@
     <label for="table_group">Pöytäseuruetoive</label>
     <input type="text" id="table_group" name="table_group" v-model="form.table_group">
 
+    <label for="organisation">Edustamani taho</label>
+    <input type="text" id="organisation" name="organisation" v-model="form.organisation">
+
     <fieldset>
-      <legend>Annan lahjan</legend>
+      <legend>Esitän tervehdyksen cocktailtilaisuudessa</legend>
       <div class="radio_select">
         <label for="gift_yes">
           <input type="radio" id="gift_yes" value=true name="gift" v-model="form.gift">
@@ -108,9 +101,6 @@
         </label>
       </div>
     </fieldset>
-
-    <label for="organisation">Edustamani taho</label>
-    <input type="text" id="organisation" name="organisation" v-model="form.organisation">
 
     <fieldset>
       <legend>Ostan sillislipun*</legend>
@@ -136,22 +126,21 @@ const { $directus, $createItem} = useNuxtApp()
 
 const props = defineProps({
   fields: Object,
-  ticket_type: String,
+  quota: String,
   reservation_time: String,
 })
 
 const form = useState('form', () => {
   return {
-    'ticket_type': props.ticket_type,
-    'participant_type': props.ticket_type,
+    'quota': props.quota,
+    'ticket_type': props.quota,
   }
 })
 
 const router = useRouter();
 
 const handleSubmit = async () => {
-  form.value["ticket_type"] = props.ticket_type
-  console.log(form.value)
+  form.value["quota"] = props.quota
   const {data: res} = await useAsyncData('send_signup', () => {
     return $directus.request(
         $createItem('participants', form.value)
@@ -207,7 +196,8 @@ legend {
 }
 .radio_select {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
+  gap: 1.5rem;
 }
 
 button {

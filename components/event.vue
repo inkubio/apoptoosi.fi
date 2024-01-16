@@ -8,9 +8,7 @@
     </clipPath>
   </svg>
   <div id="container" class="parity">
-    <div class="title"
-         :style="{'background-image': `url(${image})`}"
-         :class="Date.now() < new Date(date).getTime() ? null: 'past_event'" >
+    <div class="title" :style="{'background-image': `url(${image})`}">
       <span v-if="date != null">{{event_date}}</span>
     </div>
     <div class="info">

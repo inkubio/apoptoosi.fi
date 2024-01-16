@@ -33,7 +33,6 @@ const {data: events} = await useAsyncData('events', () => {
       })
   )
 })
-console.log(events)
 </script>
 
 <style scoped>

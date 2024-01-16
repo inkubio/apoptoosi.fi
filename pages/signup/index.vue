@@ -4,26 +4,26 @@
     <div id="content" v-html="$mdRenderer.render(page.translations[0].description)" />
     <div id="button-container">
       <button
-          :ref="ticket_type"
+          :ref="quota"
           :disabled="false"
-          :class="{selected: ticket_type === 'invitee'}"
+          :class="{selected: quota === 'invitee'}"
           @click="select_ticket_type('invitee')">{{page.translations[0].sign_up_invitee_button_text}}</button>
       <button
-          :ref="ticket_type"
+          :ref="quota"
           :disabled="true"
-          :class="{selected: ticket_type === 'student'}"
+          :class="{selected: quota === 'student'}"
           @click="select_ticket_type('student')">{{page.translations[0].sign_up_common_button_text}}</button>
       <button
-          :ref="ticket_type"
+          :ref="quota"
           :disabled="true"
-          :class="{selected: ticket_type === 'alumni'}"
+          :class="{selected: quota === 'alumni'}"
           @click="select_ticket_type('alumni')">{{page.translations[0].sign_up_alumni_button_text}}</button>
     </div>
 
     <sign-up-form
-        v-if="ticket_type.length !== 0"
+        v-if="quota.length !== 0"
         :fields="form_fields"
-        :ticket_type="ticket_type"
+        :quota="quota"
     />
   </div>
 </template>
@@ -31,7 +31,7 @@
 <script setup>
 const { $directus, $readItems, $readFieldsByCollection, $mdRenderer} = useNuxtApp()
 
-const ticket_type = useState('ticket_type', () => "")
+const quota = useState('quota', () => "")
 
 const {data: page} = await useAsyncData('signup', () => {
   return $directus.request(
@@ -56,7 +56,7 @@ const {data: form_fields} = await useAsyncData('form_fields', () => {
 })
 
 const select_ticket_type = (selected) => {
-  ticket_type.value = selected === ticket_type.value ? "" : selected
+  quota.value = selected === quota.value ? "" : selected
 }
 </script>
 

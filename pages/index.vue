@@ -7,7 +7,7 @@
         </h1>
         <h1 v-else id="title">{{general.event_name}}</h1>
         <p id="countdown">{{formatDate(general.event_date)}}</p>
-        <!--<countdown-timer id="countdown" :event-date="general.data.event_date" />-->
+        <!--<countdown-timer id="countdown" :event-date="general.event_date" />-->
       </div>
       <span v-if="page.hero_image_credit != null" id="image_credit">{{page.hero_image_credit}}</span>
     </div>
@@ -42,7 +42,6 @@ const {data: page} = await useAsyncData('page', () => {
       })
   )
 })
-console.log(page)
 
 const {data: general} = await useAsyncData('general', () => {
   return $directus.request(
@@ -52,7 +51,6 @@ const {data: general} = await useAsyncData('general', () => {
 
 function formatDate(date){
   let d = new Date(Date.parse(date))
-  console.log(d)
   return d.getDate() + "." + (d.getMonth() + 1) + "." + d.getFullYear()
 }
 
