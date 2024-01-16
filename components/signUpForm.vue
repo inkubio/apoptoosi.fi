@@ -23,11 +23,11 @@
     <label for="email">Sähköposti*</label>
     <input type="email" id="email" name="email" v-model="form.email" placeholder="teemu.teekkari@esimerkki.fi" required>
 
-    <label for="fuksivuosi">Opiskelujen aloitusvuosi*</label>
-    <input type="number" id="fuksivuosi" name="fuksivuosin" v-model="form.fuksivuosi" placeholder="2018" required>
+    <label for="fuksivuosi">Opiskelujen aloitusvuosi</label>
+    <input type="number" id="fuksivuosi" name="fuksivuosin" v-model="form.fuksivuosi" placeholder="2018">
 
     <fieldset>
-      <legend>Lipputyyppi</legend>
+      <legend>Lipputyyppi*</legend>
       <div class="radio_select">
         <label for="student">
           <input type="radio" id="student" value="student" name="ticket_type" v-model="form.ticket_type" required>
@@ -89,10 +89,10 @@
     <input type="text" id="organisation" name="organisation" v-model="form.organisation">
 
     <fieldset>
-      <legend>Esitän tervehdyksen cocktailtilaisuudessa</legend>
+      <legend>Esitän tervehdyksen cocktailtilaisuudessa*</legend>
       <div class="radio_select">
         <label for="gift_yes">
-          <input type="radio" id="gift_yes" value=true name="gift" v-model="form.gift">
+          <input type="radio" id="gift_yes" value=true name="gift" v-model="form.gift" required>
           Kyllä
         </label>
         <label for="gift_no">
@@ -106,7 +106,7 @@
       <legend>Ostan sillislipun*</legend>
       <div class="radio_select">
         <label for="sillis_yes">
-          <input type="radio" id="sillis_yes" value=true name="sillis" v-model="form.sillis">
+          <input type="radio" id="sillis_yes" value=true name="sillis" v-model="form.sillis" required>
           Kyllä
         </label>
         <label for="sillis_no">
