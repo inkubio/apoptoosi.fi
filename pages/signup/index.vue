@@ -62,6 +62,7 @@ const {data: participants} = await useAsyncData('participants', () => {
   return $directus.request(
       $readItems('participants', {
         fields: ["*"],
+        sort: "date_created"
       })
   )
 })
