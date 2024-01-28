@@ -131,6 +131,20 @@
       </div>
     </fieldset>
 
+    <fieldset>
+      <legend>Ostan Inkubio 20 vuotta -historiateoksen*</legend>
+      <div class="radio_select">
+        <label for="history_yes">
+          <input type="radio" id="history_yes" value=true name="history" v-model="form.history_book" required>
+          Kyllä
+        </label>
+        <label for="history_no">
+          <input type="radio" id="history_no" value=false name="history" v-model="form.history_book">
+          Ei
+        </label>
+      </div>
+    </fieldset>
+
     <button type="submit">Lähetä</button>
   </form>
 
