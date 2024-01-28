@@ -105,12 +105,17 @@ const quota_amount = (selected_quota) => {
 
 const signup_open = (quota) => {
   let now = Date.now()
-  let open_time = Date.parse(page.value.signup_open)
-  let close_time = Date.parse(page.value.signup_close)
+  let timezone_offset = new Date(now).getTimezoneOffset()
+
+  // Set now to finnish time
+  now = now + 60*1000*timezone_offset + 2*60*60*1000
+
+  let open_time = Date.parse(page.value.signup_open + "+02:00")
+  let close_time = Date.parse(page.value.signup_close + "+02:00")
 
   if (quota === "invitee") {
-    open_time = Date.parse(page.value.signup_open_invite)
-    close_time = Date.parse(page.value.signup_close_invite)
+    open_time = Date.parse(page.value.signup_open_invite + "+02:00")
+    close_time = Date.parse(page.value.signup_close_invite + "+02:00")
   }
 
   return (now > open_time && now < close_time)
