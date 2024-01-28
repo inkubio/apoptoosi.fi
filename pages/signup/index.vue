@@ -11,13 +11,18 @@
       <button
           :ref="quota"
           :disabled="true"
-          :class="{selected: quota === 'student'}"
+          :class="{selected: quota === 'open'}"
           @click="select_ticket_type('student')">{{page.translations[0].sign_up_common_button_text}}</button>
       <button
           :ref="quota"
           :disabled="true"
           :class="{selected: quota === 'alumni'}"
           @click="select_ticket_type('alumni')">{{page.translations[0].sign_up_alumni_button_text}}</button>
+    </div>
+
+    <div id="quota-container">
+      <p class="spots">Avoin kiintiö: {{quota_amount("open")}} / {{page.quota_common}}</p>
+      <p class="spots">Alumnikiintiö: {{quota_amount("alumni")}} / {{page.quota_alumni}}</p>
     </div>
 
     <sign-up-form
@@ -71,13 +76,36 @@ const {data: participants_count} = await useAsyncData('participants_count', () =
   return $directus.request(
       aggregate('participants', {
         aggregate: {"count": "*"},
+        groupBy: ["quota"],
         query: {
           access_token: "Cbuc_3lBpP_kz43ddMps3VV2HBarPqh9",
         }
       })
   )
 })
+
 console.log(participants_count)
+
+let quota_used_spots = Object.fromEntries(participants_count.value.map((x) => [x.quota, x.count]));
+
+const quota_amount = (selected_quota) => {
+  let quota_alumni = quota_used_spots["alumni"] ?? 0
+  let quota_open = quota_used_spots["open"] ?? 0
+
+  if (quota_alumni > page.value.quota_alumni) {
+    quota_open = quota_open + quota_alumni - page.value.quota_alumni
+    quota_alumni = page.value.quota_alumni
+  }
+
+  if (selected_quota === "alumni") {
+    return quota_alumni
+  }
+  return quota_open
+
+
+
+
+}
 
 const select_ticket_type = (selected) => {
   quota.value = selected === quota.value ? "" : selected
@@ -115,6 +143,14 @@ input[type="radio"] {
   font-family: var(--body-font);
   border: none;
   transition: 0.3s;
+}
+#quota-container {
+  font-family: var(--body-font);
+  text-align: center;
+  margin: 0 auto;
+  padding: 1rem;
+  font-size: clamp(1em, 3vmin,1.5rem);
+  max-width: 700px;
 }
 
 button {
