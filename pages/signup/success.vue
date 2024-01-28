@@ -46,8 +46,8 @@ const quota = (value) => {
   switch (value) {
     case "invitee":
       return "Kutsuvieras"
-    case "student":
-      return "Opiskelija"
+    case "open":
+      return "Avoin"
     case "alumni":
       return "Alumni"
   }
