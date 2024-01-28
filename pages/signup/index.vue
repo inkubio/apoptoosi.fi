@@ -5,17 +5,17 @@
     <div id="button-container">
       <button
           :ref="quota"
-          :disabled="false"
+          :disabled="!signup_open('invitee')"
           :class="{selected: quota === 'invitee'}"
           @click="select_ticket_type('invitee')">{{page.translations[0].sign_up_invitee_button_text}}</button>
       <button
           :ref="quota"
-          :disabled="true"
+          :disabled="!signup_open('open')"
           :class="{selected: quota === 'open'}"
           @click="select_ticket_type('student')">{{page.translations[0].sign_up_common_button_text}}</button>
       <button
           :ref="quota"
-          :disabled="true"
+          :disabled="!signup_open('alumni')"
           :class="{selected: quota === 'alumni'}"
           @click="select_ticket_type('alumni')">{{page.translations[0].sign_up_alumni_button_text}}</button>
     </div>
@@ -101,10 +101,19 @@ const quota_amount = (selected_quota) => {
     return quota_alumni
   }
   return quota_open
+}
 
+const signup_open = (quota) => {
+  let now = Date.now()
+  let open_time = Date.parse(page.value.signup_open)
+  let close_time = Date.parse(page.value.signup_close)
 
+  if (quota === "invitee") {
+    open_time = Date.parse(page.value.signup_open_invite)
+    close_time = Date.parse(page.value.signup_close_invite)
+  }
 
-
+  return (now > open_time && now < close_time)
 }
 
 const select_ticket_type = (selected) => {
