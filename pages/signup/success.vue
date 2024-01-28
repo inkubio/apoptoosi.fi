@@ -7,7 +7,7 @@
       <li><b>Nimi</b>: {{$route.query.first_name}} {{$route.query.last_name}}</li>
       <li><b>Nimeni saa näyttää julkisessa osallistujalistassa</b>: {{human_bool($route.query.public_name)}}</li>
       <li><b>Sähköposti</b>: {{$route.query.email}}</li>
-      <li><b>Opiskeluiden aloitusvuosi</b>: {{$route.query.fuksivuosi}}</li>
+      <li><b>Opiskelujen aloitusvuosi</b>: {{$route.query.fuksivuosi}}</li>
       <li><b>Lipputyyppi</b>: {{ticket_type($route.query.ticket_type)}}</li>
       <li><b>Erityisruokavaliot</b>: {{$route.query.diet ?? "-"}}</li>
       <li><b>Pääruoka</b>: {{main_course($route.query.main_course)}}</li>
@@ -17,6 +17,7 @@
       <li><b>Edustamani taho</b>: {{$route.query.organisation ?? "-"}}</li>
       <li><b>Esitän tervehdyksen cocktailtilaisuudessa</b>: {{human_bool($route.query.gift)}}</li>
       <li><b>Ostan sillislipun</b>: {{human_bool($route.query.sillis)}}</li>
+      <li><b>Ostan Inkubio 20 vuotta -historiateoksen</b>: {{human_bool($route.query.history_book)}}</li>
     </ul>
   </div>
 </template>
