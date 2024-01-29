@@ -23,6 +23,7 @@
     <div id="quota-container">
       <p class="spots">Avoin kiintiö: {{quota_amount("open")}} / {{page.quota_common}}</p>
       <p class="spots">Alumnikiintiö: {{quota_amount("alumni")}} / {{page.quota_alumni}}</p>
+      <p class="spots" v-if="quota_amount('queue') > 0">Jonossa: {{quota_amount("queue")}}</p>
     </div>
 
     <sign-up-form
@@ -67,7 +68,8 @@ const {data: participants} = await useAsyncData('participants', () => {
   return $directus.request(
       $readItems('participants', {
         fields: ["*"],
-        sort: "date_created"
+        sort: "date_created",
+        limit: "-1"
       })
   )
 })
@@ -89,18 +91,33 @@ console.log(participants_count)
 let quota_used_spots = Object.fromEntries(participants_count.value.map((x) => [x.quota, x.count]));
 
 const quota_amount = (selected_quota) => {
-  let quota_alumni = quota_used_spots["alumni"] ?? 0
-  let quota_open = quota_used_spots["open"] ?? 0
+  let quota_alumni = parseInt(quota_used_spots["alumni"] ?? 0)
+  let quota_open = parseInt(quota_used_spots["open"] ?? 0)
+  let queue = 0
 
-  if (quota_alumni > page.value.quota_alumni) {
-    quota_open = quota_open + quota_alumni - page.value.quota_alumni
-    quota_alumni = page.value.quota_alumni
+  let alumni_max = parseInt(page.value.quota_alumni)
+  let open_max = parseInt(page.value.quota_common)
+
+  if (quota_alumni > alumni_max) {
+    quota_open = quota_open + quota_alumni - alumni_max
+    quota_alumni = alumni_max
   }
 
-  if (selected_quota === "alumni") {
-    return quota_alumni
+  if (quota_open > open_max) {
+    queue = quota_open - open_max
+    quota_open = open_max
   }
-  return quota_open
+
+  switch (selected_quota) {
+    case "alumni":
+      return quota_alumni
+    case "open":
+      return quota_open
+    case "queue":
+      return queue
+    default:
+      return 0
+  }
 }
 
 const signup_open = (quota) => {
@@ -162,7 +179,6 @@ input[type="radio"] {
   font-family: var(--body-font);
   text-align: center;
   margin: 0 auto;
-  padding: 1rem;
   font-size: clamp(1em, 3vmin,1.5rem);
   max-width: 700px;
 }
@@ -204,6 +220,7 @@ button:disabled {
   font-size: clamp(1em, 3vmin,1.5rem);
   font-weight: lighter;
   font-family: var(--body-font);
+  margin-top: 1rem;
 }
 ol {
   padding: 0;
