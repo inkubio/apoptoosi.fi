@@ -86,8 +86,6 @@ const {data: participants_count} = await useAsyncData('participants_count', () =
   )
 })
 
-console.log(participants_count)
-
 let quota_used_spots = Object.fromEntries(participants_count.value.map((x) => [x.quota, x.count]));
 
 const quota_amount = (selected_quota) => {
