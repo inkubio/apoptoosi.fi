@@ -29,5 +29,14 @@ export default defineNuxtConfig({
         },
     },
     css: ['@/assets/theme.css'],
+    nitro: {
+        azure: {
+            config: {
+                platform: {
+                    apiRuntime: 'node:18'
+                }
+            }
+        }
+    }
 })
 
