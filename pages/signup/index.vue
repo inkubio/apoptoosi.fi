@@ -32,7 +32,9 @@
     />
     <div id="participant-container" v-else>
       <h3>Osallistujat</h3>
-      <p class="spots">Ilmoittautuneita: {{participants_count[0].count}}</p>
+      <p class="spots">Ilmoittautuneita: {{parseInt(quota_used_spots["alumni"] ?? 0)
+            + parseInt(quota_used_spots["open"] ?? 0)
+            + parseInt(quota_used_spots["invitee"] ?? 0)}}</p>
       <ol>
         <li v-for="p in participants">{{p.first_name}} {{p.last_name}}</li>
       </ol>
