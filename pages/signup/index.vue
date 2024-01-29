@@ -12,7 +12,7 @@
           :ref="quota"
           :disabled="!signup_open('open')"
           :class="{selected: quota === 'open'}"
-          @click="select_ticket_type('student')">{{page.translations[0].sign_up_common_button_text}}</button>
+          @click="select_ticket_type('open')">{{page.translations[0].sign_up_common_button_text}}</button>
       <button
           :ref="quota"
           :disabled="!signup_open('alumni')"
