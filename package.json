@@ -16,5 +16,8 @@
     "@directus/sdk": "^14.0.0",
     "@types/markdown-it": "^13.0.7",
     "markdown-it": "^14.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }
