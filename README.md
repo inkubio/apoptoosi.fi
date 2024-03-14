@@ -1,8 +1,11 @@
-# Nuxt 3 Minimal Starter
+# apoptoosi.fi
+Inkubio ry's annual ball website frontend built with nuxt3. Uses the Directus headless CMS as the backend.
 
-Look at the [nuxt 3 documentation](https://v3.nuxtjs.org) to learn more.
+## Deployment
+Changes to master branch automatically deploys the changes to Azure static web service.
 
-## Setup
+## Local development
+### Setup
 
 Make sure to install the dependencies:
 
@@ -17,7 +20,7 @@ npm install
 pnpm install --shamefully-hoist
 ```
 
-## Development Server
+### Development Server
 
 Start the development server on http://localhost:3000
 
@@ -25,7 +28,7 @@ Start the development server on http://localhost:3000
 npm run dev
 ```
 
-## Production
+### Production
 
 Build the application for production:
 
