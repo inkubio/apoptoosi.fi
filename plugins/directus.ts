@@ -1,6 +1,6 @@
 import { createDirectus, rest, readItem, readItems, readFieldsByCollection, createItem, aggregate} from '@directus/sdk';
 
-const directus = createDirectus('https://directus.apoptoosi.fi').with(rest());
+const directus = createDirectus("http://localhost:8055").with(rest());
 
 export default defineNuxtPlugin(() => {
     return {

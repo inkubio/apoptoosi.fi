@@ -1,37 +1,54 @@
 @font-face {
-    font-family: "Broadmoor";
-    src: local("Broadmoor"), url(fonts/Broadmoor_bold.otf) format("opentype");
+    font-family: "KilnSerif";
+    src: local("KilnSerif"), url(fonts/KilnSerifRegular.ttf) format("truetype");
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
-    font-family: "Avenir";
-    src: local("Avenir"), url(fonts/AvenirLTStd-Roman.otf) format("opentype");
+    font-family: "BenguiatProITC";
+    src: local("BenguiatProITC"), url("fonts/BenguiatProITC-Bold.ttf") format("truetype");
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "BenguiatProITC";
+    src: local("BenguiatProITC"), url("fonts/BenguiatProITC-Book.ttf") format("truetype");
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
-    font-family: "BonvenoCF";
-    src: local("BonvenoCF"), url(fonts/BonvenoCF-Light.otf) format("opentype");
+    font-family: "IndustryInc";
+    src: local("IndustryInc"), url("fonts/IndustryIncTest-Stencil.otf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "BrimNarrow";
+    src: local("BrimNarrow"), url("fonts/BrimNarrow-Combined2.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
 }
 
 :root  {
-    --title_color: #101010;
+    --title_color: #F0F0F0;
 
+    --text-color: #010101;
     --text-secondary: #f0f0f0;
 
-    --nav1: #c08C38;
-    --nav2: var(--secondary);
-    --nav3: #102542;
+    --nav1: #a30000;
+    --nav2: #04395e;
+    --nav3: #f9d94e;
 
-    --bg-color: #f7d6c7;
+    --bg-color: #808b7e;
 
-    --primary: #157359;
-    --secondary: #004a33;
+    --primary: #04395e;
+    --secondary: #04395e;
 
-    --body-font: 'Avenir', sans-serif;
-    --title-font: 'Broadmoor', serif;
-    --heading-font: 'BonvenoCF', serif;
+    --body-font: 'BenguiatProITC', sans-serif;
+    --title-font: 'BrimNarrow', cursive;
+    --heading-font: 'IndustryInc', serif;
 }

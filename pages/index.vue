@@ -7,7 +7,6 @@
         </h1>
         <h1 v-else id="title">{{general.event_name}}</h1>
         <p id="countdown">{{formatDate(general.event_date)}}</p>
-        <!--<countdown-timer id="countdown" :event-date="general.event_date" />-->
       </div>
       <span v-if="page.hero_image_credit != null" id="image_credit">{{page.hero_image_credit}}</span>
     </div>
@@ -21,7 +20,7 @@
   </main>
 </template>
 
-<script setup>
+<script setup lang="ts">
 const { $directus, $readItems } = useNuxtApp()
 
 definePageMeta({layout: "landingpage",});
@@ -29,15 +28,26 @@ definePageMeta({layout: "landingpage",});
 const {data: page} = await useAsyncData('page', () => {
   return $directus.request(
       $readItems('homepage', {
-        fields: ["hero_image", "logo", "hero_image_credit", {'translations': ['*']}],
+        fields: ["hero_image", "logo", "hero_image_credit", "translations.*"],
+        alias: {
+          finnish_translations: "translations",
+          english_translations: "translations",
+        },
         deep: {
-          translations: {
+          finnish_translations: {
             _filter: {
-              languages_id: {
+              code: {
                 _eq: "fi"
               }
             }
-          }
+          },
+          english_translations: {
+            _filter: {
+              code: {
+                _eq: "en"
+              }
+            }
+          },
         }
       })
   )
@@ -113,7 +123,7 @@ main {
 }
 .nav-button {
   text-decoration: none;
-  color: white;
+  color: var(--text-secondary);
   background-color: grey;
   font-size: clamp(1em, 10vmin,2rem);
   padding: clamp(1em, 7vmax, 4em) 0;
@@ -146,6 +156,6 @@ main {
 
 #footer {
   background-color: var(--secondary);
-  color: white;
+  color: var(--text-secondary);
 }
 </style>
