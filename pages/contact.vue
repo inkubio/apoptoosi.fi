@@ -10,11 +10,24 @@
 
 <script setup lang="ts">
 const { $directus, $readSingleton} = useNuxtApp()
+const {locale} = useI18n()
 
 const {data: page} = await useAsyncData('contact', () => {
   return $directus.request(
       $readSingleton('contact', {
         fields: ["email", {"translations": ['*']}],
+        filter: {
+          translations: {
+            languages_code: {_eq: locale.value}
+          },
+        },
+        deep: {
+          translations: {
+            _filter: {
+              languages_code: { _eq: locale.value}
+            }
+          }
+        }
       })
   )
 })
