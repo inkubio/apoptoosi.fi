@@ -2,10 +2,18 @@
   <div>
     <h2>{{page.translations[0].title}}</h2>
     <div id="content" v-html="$mdRenderer.render(page.translations[0].description)" />
-
     <div id="quota-container">
-      <p class="spots">Kiintiö: {{participant_count.count ?? 0}} / {{page.quota}}</p>
-      <p class="spots" v-if="participant_count >= page.quota">Jonossa: {{participant_count - page.quota}}</p>
+      <p class="spots">Kiintiö: {{p_count}} / {{page.quota}}</p>
+      <p class="spots" v-if="p_count >= page.quota">Jonossa: {{p_count - page.quota}}</p>
+    </div>
+
+    <div class="quota_selection">
+      <button @click="select_quota('open')" :class="{selected: quota == 'open'}">
+        Avoin
+      </button>
+      <button @click="select_quota('invitee')" :class="{selected: quota == 'invitee'}">
+        Kutsuvieras
+      </button>
     </div>
 
     <sign-up-form
@@ -14,9 +22,11 @@
     />
     <div v-else>
       <h3 v-if="quota.length === 0">Ilmoittautuneet</h3>
-      <ol>
+
+      <ol v-if="p_count != 0">
         <li v-for="p in participants">{{p.first_name}} {{p.last_name}}</li>
       </ol>
+      <p v-else>Ei ilmoittautuneita</p>
 
     </div>
   </div>
@@ -65,6 +75,9 @@ const {data: participant_count} = await useAsyncData('participants_count', () =>
       })
   )
 })
+const p_count = computed(() => {
+  return parseInt(participant_count.value[0].count ?? 0)
+})
 
 const signup_open = (quota) => {
   let now = Date.now()
@@ -84,9 +97,14 @@ const signup_open = (quota) => {
   return (now > open_time && now < close_time)
 }
 
-const select_ticket_type = (selected) => {
-  quota.value = selected === quota.value ? "" : selected
+const select_quota = (selected_quota: string) => {
+  if (selected_quota === quota.value) {
+    quota.value = "";
+    return
+  }
+  quota.value = selected_quota;
 }
+
 </script>
 
 <style scoped>
@@ -129,7 +147,7 @@ button:hover {
 button:disabled {
   opacity: 0.2;
 }
-#button-container {
+.quota_selection {
   display: flex;
   justify-content: center;
   gap: 1rem;
