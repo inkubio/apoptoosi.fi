@@ -79,25 +79,6 @@ const select_ticket_type = (selected) => {
 </script>
 
 <style scoped>
-h2, h3 {
-  font-family: var(--heading-font);
-  text-decoration: none;
-  font-weight: normal;
-  color: black;
-  margin: auto 0;
-  text-align: center;
-  transition: 0.3s;
-  font-size: min(5vmin,2rem);
-}
-#content {
-  font-family: var(--body-font);
-  text-align: center;
-  margin: 2rem auto;
-  padding: 0 1rem;
-  font-size: clamp(1em, 3vmin,1.5rem);
-  max-width: 700px;
-}
-
 input[type="radio"] {
   text-decoration: none;
   box-shadow: none;
@@ -130,6 +111,7 @@ button {
   border: none;
   transition: 0.3s;
 }
+
 button:hover {
   opacity: 0.5;
 }

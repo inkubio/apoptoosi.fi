@@ -103,6 +103,7 @@ main {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(clamp(33%, (60rem - 100%) * 999, 100%), 1fr));
 }
+
 .nav-button {
   text-decoration: none;
   color: var(--text-secondary);
@@ -125,15 +126,6 @@ main {
 }
 #contact {
   background-color: var(--nav3);
-}
-
-#content {
-  font-family: var(--body-font);
-  text-align: center;
-  margin: 2rem auto;
-  padding: 0 1rem;
-  font-size: clamp(1em, 3vmin,1.5rem);
-  max-width: 700px;
 }
 
 #footer {

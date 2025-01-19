@@ -33,6 +33,25 @@
     font-style: normal;
 }
 
+h2, h3 {
+    font-family: var(--heading-font), serif;
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: normal;
+    text-align: center;
+    transition: 0.3s;
+    font-size: clamp(1rem, 7vmin,2.5rem);
+}
+
+#content, p {
+    font-family: var(--body-font), serif;
+    text-align: center;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    font-size: clamp(1em, 3vmin,1.5rem);
+    max-width: 700px;
+}
+
 :root  {
     --title_color: #F0F0F0;
 

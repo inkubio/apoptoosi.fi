@@ -88,13 +88,6 @@ const human_bool = (value) => {
 </script>
 
 <style scoped>
-p {
-  font-family: var(--body-font);
-  text-align: center;
-  margin: 2rem auto;
-  font-size: clamp(1rem, 3vmin,1.5rem);
-  max-width: 700px;
-}
 ul {
   list-style: none;
   display: flex;
