@@ -15,12 +15,25 @@
 
 <script setup lang="ts">
 const { $directus, $readItems } = useNuxtApp()
+const {locale} = useI18n()
 
 const {data: events} = await useAsyncData('events', () => {
   return $directus.request(
       $readItems('events', {
         fields: ["event_date", "image", "sign_up_button", "event_url", {"translations": ['*']}],
         sort: ["event_date"],
+        filter: {
+          translations: {
+            languages_code: {_eq: locale.value}
+          },
+        },
+        deep: {
+          translations: {
+            _filter: {
+              languages_code: { _eq: locale.value}
+            }
+          }
+        }
       })
   )
 })

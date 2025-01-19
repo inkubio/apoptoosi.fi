@@ -1,6 +1,12 @@
 <template>
   <main>
     <div id="home-image" :style="{'background-image': `url(${$directus.url}assets/${page?.hero_image}`}">
+      <nav id="language-selection">
+        <button v-for="l in locales"
+                class="language-button"
+                :class="{'selected-language': l == locale}"
+                @click="setLocale(l)">{{l}}</button>
+      </nav>
       <div class="title-container">
         <h1 id="title" v-if="page?.logo != null">
           <img :src="`${$directus.url}assets/${page.logo}`" :alt="general?.event_name">
@@ -11,9 +17,9 @@
       <span v-if="page.hero_image_credit != null" id="image_credit">{{page?.hero_image_credit}}</span>
     </div>
     <nav id="navigation">
-      <NuxtLink id="events" to="/events" class="nav-button">Tapahtumat</NuxtLink>
-      <NuxtLink id="signup" to="/signup" class="nav-button disabled" >Ilmoittautuminen</NuxtLink>
-      <NuxtLink id="contact" to="/contact" class="nav-button">Yhteystiedot</NuxtLink>
+      <NuxtLink id="events" :to="localePath('events')" class="nav-button">Tapahtumat</NuxtLink>
+      <NuxtLink id="signup" :to="localePath('signup')" class="nav-button disabled" >Ilmoittautuminen</NuxtLink>
+      <NuxtLink id="contact" :to="localePath('contact')" class="nav-button">Yhteystiedot</NuxtLink>
     </nav>
     <div id="content" v-html="$mdRenderer.render(page.translations[0]?.description)" />
     <home-footer id="footer" :title="page.translations[0]?.footer_title"/>
@@ -21,6 +27,8 @@
 </template>
 
 <script setup lang="ts">
+const { setLocale, locales, locale} = useI18n()
+const localePath = useLocalePath()
 const { $directus, $readSingleton } = useNuxtApp()
 
 definePageMeta({layout: "landingpage",});
@@ -29,6 +37,18 @@ const {data: page} = await useAsyncData('homepage', () => {
   return $directus.request(
       $readSingleton('homepage', {
         fields: ["hero_image", "logo", "hero_image_credit", {"translations": ["*"]}],
+        filter: {
+          translations: {
+            languages_code: {_eq: locale.value}
+          },
+        },
+        deep: {
+          translations: {
+            _filter: {
+              languages_code: { _eq: locale.value}
+            }
+          }
+        }
       })
   )
 })
@@ -45,6 +65,7 @@ function formatDate(date: string){
   let d = new Date(Date.parse(date))
   return d.getDate() + "." + (d.getMonth() + 1) + "." + d.getFullYear()
 }
+
 
 </script>
 
@@ -115,9 +136,29 @@ main {
   text-align: center;
   transition: 0.3s;
 }
+
 .nav-button:hover {
   opacity: 0.75;
 }
+
+#language-selection {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+}
+.language-button {
+  background: none;
+  border: none;
+  font-family: var(--title-font), san-serif;
+  font-size: clamp(0.5rem, 10vmin,1rem);
+}
+.language-button:hover {
+  color: var(--text-secondary);
+}
+.selected-language {
+  font-weight: bold;
+}
+
 #events {
   background-color: var(--nav1);
 }
