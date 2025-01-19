@@ -23,16 +23,27 @@
 </template>
 
 <script setup lang="ts">
-import {aggregate} from "@directus/sdk";
-
-const { $directus, $readItems, $readSingleton, $mdRenderer} = useNuxtApp()
+const { $directus, $readItems, $readSingleton, $aggregate, $mdRenderer} = useNuxtApp()
+const {locale} = useI18n()
 
 const quota = useState('quota', () => "")
 
 const {data: page} = await useAsyncData('signup', () => {
   return $directus.request(
     $readSingleton('signup', {
-      fields: ["*", "*.*"]
+      fields: ["*", {"translations": ["*"]}],
+      filter: {
+        translations: {
+          languages_code: {_eq: locale.value}
+        },
+      },
+      deep: {
+        translations: {
+          _filter: {
+            languages_code: { _eq: locale.value}
+          }
+        }
+      }
     })
   )
 })
@@ -42,14 +53,14 @@ const {data: participants} = await useAsyncData('participants', () => {
       $readItems('participants', {
         fields: ["*"],
         sort: "date_created",
-        limit: "-1"
+        limit: -1
       })
   )
 })
 
 const {data: participant_count} = await useAsyncData('participants_count', () => {
   return $directus.request(
-      aggregate('participants', {
+      $aggregate('participants', {
         aggregate: {"count": "*"}
       })
   )

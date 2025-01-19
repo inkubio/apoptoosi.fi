@@ -15,7 +15,7 @@ export interface EventTranslations {
     languages_code: string;
     name: string;
     description: string;
-    sign_up_button_text: string;
+    signup_button_text: string;
 }
 
 // Homepage types
@@ -65,7 +65,7 @@ export interface ContactPage {
     id: number;
     status: string;
     email: string;
-    translation: ContactPageTranslations[];
+    translations: ContactPageTranslations[];
 }
 
 export interface ContactPageTranslations{
