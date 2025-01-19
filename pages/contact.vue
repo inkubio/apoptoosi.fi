@@ -8,22 +8,13 @@
   </div>
 </template>
 
-<script setup>
-const { $directus, $readItems } = useNuxtApp()
+<script setup lang="ts">
+const { $directus, $readSingleton} = useNuxtApp()
 
 const {data: page} = await useAsyncData('contact', () => {
   return $directus.request(
-      $readItems('contact', {
+      $readSingleton('contact', {
         fields: ["email", {"translations": ['*']}],
-        deep: {
-          translations: {
-            _filter: {
-              languages_code: {
-                _eq: "fi"
-              }
-            }
-          }
-        }
       })
   )
 })

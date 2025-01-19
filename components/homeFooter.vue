@@ -2,7 +2,7 @@
   <div id="footer">
     <h2>{{ title }}</h2>
     <div v-for="company in footer" class="container">
-      <a :href="company.company_url">
+      <a :href="company.company_website">
         <img :src="`${$directus.url}assets/${company.logo}`">
       </a>
     </div>
@@ -39,7 +39,7 @@ h2  {
   justify-items: center;
 }
 img {
-  max-width: clamp(20rem, 50vw, 20rem);
+  width: clamp(10rem, 20rem, 50vw);
 }
 a {
   text-align: center;

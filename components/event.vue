@@ -84,7 +84,7 @@ const event_date = computed(() => {
 h2 {
   text-align: center;
   font-size: clamp(1rem, 7vmin,2.5rem);
-  color: var(--title_color);
+  color: var(--text-color);
   font-family: var(--heading-font);
 }
 span {

@@ -2,66 +2,37 @@
   <div>
     <h2>{{page.translations[0].title}}</h2>
     <div id="content" v-html="$mdRenderer.render(page.translations[0].description)" />
-    <div id="button-container">
-      <button
-          :ref="quota"
-          :disabled="!signup_open('invitee')"
-          :class="{selected: quota === 'invitee'}"
-          @click="select_ticket_type('invitee')">{{page.translations[0].sign_up_invitee_button_text}}</button>
-      <button
-          :ref="quota"
-          :disabled="!signup_open('open')"
-          :class="{selected: quota === 'open'}"
-          @click="select_ticket_type('open')">{{page.translations[0].sign_up_common_button_text}}</button>
-      <button
-          :ref="quota"
-          :disabled="!signup_open('alumni')"
-          :class="{selected: quota === 'alumni'}"
-          @click="select_ticket_type('alumni')">{{page.translations[0].sign_up_alumni_button_text}}</button>
-    </div>
 
     <div id="quota-container">
-      <p class="spots">Avoin kiintiö: {{quota_amount("open")}} / {{page.quota_common}}</p>
-      <p class="spots">Alumnikiintiö: {{quota_amount("alumni")}} / {{page.quota_alumni}}</p>
-      <p class="spots" v-if="quota_amount('queue') > 0">Jonossa: {{quota_amount("queue")}}</p>
+      <p class="spots">Kiintiö: {{participant_count.count ?? 0}} / {{page.quota}}</p>
+      <p class="spots" v-if="participant_count >= page.quota">Jonossa: {{participant_count - page.quota}}</p>
     </div>
 
     <sign-up-form
         v-if="quota.length !== 0"
         :quota="quota"
     />
-    <div id="participant-container" v-else>
-      <h3>Osallistujat</h3>
-      <p class="spots">Ilmoittautuneita: {{parseInt(quota_used_spots["alumni"] ?? 0)
-            + parseInt(quota_used_spots["open"] ?? 0)
-            + parseInt(quota_used_spots["invitee"] ?? 0)}}</p>
+    <div v-else>
+      <h3 v-if="quota.length === 0">Ilmoittautuneet</h3>
       <ol>
         <li v-for="p in participants">{{p.first_name}} {{p.last_name}}</li>
       </ol>
+
     </div>
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import {aggregate} from "@directus/sdk";
 
-const { $directus, $readItems, $mdRenderer} = useNuxtApp()
+const { $directus, $readItems, $readSingleton, $mdRenderer} = useNuxtApp()
 
 const quota = useState('quota', () => "")
 
 const {data: page} = await useAsyncData('signup', () => {
   return $directus.request(
-    $readItems('signup', {
-      fields: ["*", "*.*"],
-      deep: {
-        translations: {
-          _filter: {
-            languages_code: {
-              _eq: "fi"
-            }
-          }
-        }
-      }
+    $readSingleton('signup', {
+      fields: ["*", "*.*"]
     })
   )
 })
@@ -76,49 +47,13 @@ const {data: participants} = await useAsyncData('participants', () => {
   )
 })
 
-const {data: participants_count} = await useAsyncData('participants_count', () => {
+const {data: participant_count} = await useAsyncData('participants_count', () => {
   return $directus.request(
       aggregate('participants', {
-        aggregate: {"count": "*"},
-        groupBy: ["quota"],
-        query: {
-          access_token: "Cbuc_3lBpP_kz43ddMps3VV2HBarPqh9",
-        }
+        aggregate: {"count": "*"}
       })
   )
 })
-
-let quota_used_spots = Object.fromEntries(participants_count.value.map((x) => [x.quota, x.count]));
-
-const quota_amount = (selected_quota) => {
-  let quota_alumni = parseInt(quota_used_spots["alumni"] ?? 0)
-  let quota_open = parseInt(quota_used_spots["open"] ?? 0)
-  let queue = 0
-
-  let alumni_max = parseInt(page.value.quota_alumni)
-  let open_max = parseInt(page.value.quota_common)
-
-  if (quota_alumni > alumni_max) {
-    quota_open = quota_open + quota_alumni - alumni_max
-    quota_alumni = alumni_max
-  }
-
-  if (quota_open > open_max) {
-    queue = quota_open - open_max
-    quota_open = open_max
-  }
-
-  switch (selected_quota) {
-    case "alumni":
-      return quota_alumni
-    case "open":
-      return quota_open
-    case "queue":
-      return queue
-    default:
-      return 0
-  }
-}
 
 const signup_open = (quota) => {
   let now = Date.now()

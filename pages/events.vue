@@ -13,7 +13,7 @@
   <ul v-else><p>Tapahtumat julkaistaan myöhemmin</p></ul>
 </template>
 
-<script setup>
+<script setup lang="ts">
 const { $directus, $readItems } = useNuxtApp()
 
 const {data: events} = await useAsyncData('events', () => {
@@ -21,15 +21,6 @@ const {data: events} = await useAsyncData('events', () => {
       $readItems('events', {
         fields: ["event_date", "image", "sign_up_button", "event_url", {"translations": ['*']}],
         sort: ["event_date"],
-        deep: {
-          translations: {
-            _filter: {
-              languages_code: {
-                _eq: "fi"
-              }
-            }
-          }
-        }
       })
   )
 })

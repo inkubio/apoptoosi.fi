@@ -11,7 +11,7 @@ body {
 }
 
 .page-enter-active, .page-leave-active {
-  transition: all 0.2s;
+  transition: all 0.05s;
 }
 
 .page-enter-from, .page-leave-to {
@@ -20,7 +20,7 @@ body {
 }
 
 .layout-enter-active, .layout-leave-active {
-  transition: all 0.2s;
+  transition: all 0.05s;
 }
 
 .layout-enter-from, .layout-leave-to {

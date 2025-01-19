@@ -1,65 +1,47 @@
 <template>
   <main>
-    <div id="home-image" :style="{'background-image': `url(${$directus.url}assets/${page.hero_image}`}">
+    <div id="home-image" :style="{'background-image': `url(${$directus.url}assets/${page?.hero_image}`}">
       <div class="title-container">
-        <h1 id="title" v-if="page.logo != null">
-          <img :src="`${$directus.url}assets/${page.logo}`" :alt="general.event_name">
+        <h1 id="title" v-if="page?.logo != null">
+          <img :src="`${$directus.url}assets/${page.logo}`" :alt="general?.event_name">
         </h1>
-        <h1 v-else id="title">{{general.event_name}}</h1>
+        <h1 v-else id="title">{{general?.event_name}}</h1>
         <p id="countdown">{{formatDate(general.event_date)}}</p>
       </div>
-      <span v-if="page.hero_image_credit != null" id="image_credit">{{page.hero_image_credit}}</span>
+      <span v-if="page.hero_image_credit != null" id="image_credit">{{page?.hero_image_credit}}</span>
     </div>
     <nav id="navigation">
       <NuxtLink id="events" to="/events" class="nav-button">Tapahtumat</NuxtLink>
       <NuxtLink id="signup" to="/signup" class="nav-button disabled" >Ilmoittautuminen</NuxtLink>
       <NuxtLink id="contact" to="/contact" class="nav-button">Yhteystiedot</NuxtLink>
     </nav>
-    <div id="content" v-html="$mdRenderer.render(page.translations[0].description)" />
-    <home-footer id="footer" :title="page.translations[0].footer_title"/>
+    <div id="content" v-html="$mdRenderer.render(page.translations[0]?.description)" />
+    <home-footer id="footer" :title="page.translations[0]?.footer_title"/>
   </main>
 </template>
 
 <script setup lang="ts">
-const { $directus, $readItems } = useNuxtApp()
+const { $directus, $readSingleton } = useNuxtApp()
 
 definePageMeta({layout: "landingpage",});
 
-const {data: page} = await useAsyncData('page', () => {
+const {data: page} = await useAsyncData('homepage', () => {
   return $directus.request(
-      $readItems('homepage', {
-        fields: ["hero_image", "logo", "hero_image_credit", "translations.*"],
-        alias: {
-          finnish_translations: "translations",
-          english_translations: "translations",
-        },
-        deep: {
-          finnish_translations: {
-            _filter: {
-              code: {
-                _eq: "fi"
-              }
-            }
-          },
-          english_translations: {
-            _filter: {
-              code: {
-                _eq: "en"
-              }
-            }
-          },
-        }
+      $readSingleton('homepage', {
+        fields: ["hero_image", "logo", "hero_image_credit", {"translations": ["*"]}],
       })
   )
 })
 
 const {data: general} = await useAsyncData('general', () => {
   return $directus.request(
-      $readItems('general')
+      $readSingleton('general', {
+        fields: ["event_name", "event_date"]
+      })
   )
 })
 
-function formatDate(date){
+function formatDate(date: string){
   let d = new Date(Date.parse(date))
   return d.getDate() + "." + (d.getMonth() + 1) + "." + d.getFullYear()
 }

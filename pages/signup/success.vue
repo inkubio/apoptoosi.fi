@@ -22,7 +22,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 const { $directus, $readItems} = useNuxtApp()
 
 const {data: page} = await useAsyncData('signup', () => {
