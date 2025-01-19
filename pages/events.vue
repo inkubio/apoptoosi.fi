@@ -4,7 +4,7 @@
       <event :title="event.translations[0].name" :description="event.translations[0].description"
              :image="event.image != null ? `${$directus.url}assets/${event.image}` : ''"
              :signup="event.event_url"
-             :signup_text="event.translations[0].sign_up_button_text"
+             :signup_text="event.translations[0].signup_button_text"
              :signup_enabled="event.sign_up_button"
              :date="event.event_date"
              :parity=index />

@@ -13,8 +13,9 @@ export interface EventTranslations {
     id: number;
     events_id: number;
     languages_code: string;
-    description: string;
     name: string;
+    description: string;
+    sign_up_button_text: string;
 }
 
 // Homepage types

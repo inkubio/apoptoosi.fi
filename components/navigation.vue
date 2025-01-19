@@ -53,5 +53,9 @@ nav {
   #home {
     text-align: center;
   }
+  .subnav {
+    padding-bottom: 1rem;
+    border-bottom: rgba(1, 1, 1, 0.2) solid 1px;
+  }
 }
 </style>

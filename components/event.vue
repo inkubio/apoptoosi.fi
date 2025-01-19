@@ -40,6 +40,9 @@ const event_date = computed(() => {
   display: grid;
   grid-template-areas: "image info";
   grid-template-columns: 1fr 1fr;
+  max-width: 1500px;
+  margin: 0 auto;
+  border-bottom: rgba(1, 1, 1, 0.2) solid 1px;
 }
 
 .title {
@@ -55,6 +58,7 @@ const event_date = computed(() => {
   flex-flow: column;
   justify-content: center;
   justify-self: center;
+  align-self: center;
 }
 
 @media only screen and (max-width: 700px) {
@@ -62,14 +66,10 @@ const event_date = computed(() => {
     display: flex;
     flex-flow: column;
     align-items: center;
+    border-bottom: none;
   }
 }
-h2 {
-  text-align: center;
-  font-size: clamp(1rem, 7vmin,2.5rem);
-  color: var(--text-color);
-  font-family: var(--heading-font);
-}
+
 span {
   text-align: center;
   font-size: 3rem;
