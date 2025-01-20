@@ -29,14 +29,14 @@ const localePath = useLocalePath()
 <style scoped>
 nav {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 10rem), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 40rem), 1fr));
   min-height: 3em;
   padding: 0 1em;
   margin-bottom: 1rem;
 }
 .subnav {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(clamp(20%, (30rem - 100%) * 999, 100%), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(clamp(25%, (40rem - 100%) * 999, 100%), 1fr));
   row-gap: 1em;
   justify-items: center;
   align-items: center;
@@ -80,7 +80,7 @@ nav {
   font-weight: bold;
 }
 
-@media all and (max-width: 991px) {
+@media all and (max-width: 1475px) {
   #home {
     text-align: center;
   }
