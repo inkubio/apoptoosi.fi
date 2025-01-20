@@ -58,7 +58,7 @@ const {data: page} = await useAsyncData('signup', () => {
   )
 })
 
-const {data: participants} = await useAsyncData('participants', () => {
+const {data: participants} = await useAsyncData('participants_req', () => {
   return $directus.request(
       $readItems('participants', {
         fields: ["*"],
@@ -67,7 +67,6 @@ const {data: participants} = await useAsyncData('participants', () => {
       })
   )
 })
-
 const {data: participant_count} = await useAsyncData('participants_count', () => {
   return $directus.request(
       $aggregate('participants', {
@@ -75,9 +74,18 @@ const {data: participant_count} = await useAsyncData('participants_count', () =>
       })
   )
 })
+
 const p_count = computed(() => {
   return parseInt(participant_count.value[0].count ?? 0)
 })
+
+const select_quota = (selected_quota: string) => {
+  if (selected_quota === quota.value) {
+    quota.value = "";
+    return
+  }
+  quota.value = selected_quota;
+}
 
 const signup_open = (quota) => {
   let now = Date.now()
@@ -95,14 +103,6 @@ const signup_open = (quota) => {
   }
 
   return (now > open_time && now < close_time)
-}
-
-const select_quota = (selected_quota: string) => {
-  if (selected_quota === quota.value) {
-    quota.value = "";
-    return
-  }
-  quota.value = selected_quota;
 }
 
 </script>

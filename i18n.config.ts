@@ -23,7 +23,7 @@ export default defineI18nConfig(() => ({
             open_quota: 'Open',
             invitee_quota: 'Invitee',
             signups: "Sign ups",
-            no_signup: "No sing ups.",
+            no_signup: "No sign ups.",
             no_events: "The events will be published at a later date."
         }
     }
