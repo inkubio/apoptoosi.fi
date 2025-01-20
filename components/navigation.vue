@@ -1,10 +1,10 @@
 <template>
   <nav>
-    <NuxtLink id="home" :to="localePath('/')" class="nav-button">Apoptoosi XX</NuxtLink>
+    <NuxtLink id="home" :to="localePath('/')" class="nav-button">Apoptoosi XXI</NuxtLink>
     <div class="subnav">
-      <NuxtLink :to="localePath('/events')" class="nav-button">Tapahtumat</NuxtLink>
-      <NuxtLink :to="localePath('/signup')" class="nav-button">Ilmoittautuminen</NuxtLink>
-      <NuxtLink :to="localePath('/contact')"class="nav-button">Yhteystiedot</NuxtLink>
+      <NuxtLink :to="localePath('/events')" class="nav-button">{{ $t("events") }}</NuxtLink>
+      <NuxtLink :to="localePath('/signup')" class="nav-button">{{ $t("signup") }}</NuxtLink>
+      <NuxtLink :to="localePath('/contact')"class="nav-button">{{ $t("contact") }}</NuxtLink>
       <div id="language-selector">
         <button v-for="l in locales"
                 class="language-button"
