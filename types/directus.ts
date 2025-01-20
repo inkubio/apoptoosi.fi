@@ -101,8 +101,19 @@ export interface Participants{
     date_created: string;
     date_updated: string;
     quota: string;
-    ticket_type: string;
     first_name: string;
     last_name: string;
+    public_name: boolean
     email: string;
+    fuksi_year: number;
+    ticket_type: string;
+    dietary_restrictions: string;
+    main_course: string;
+    alcohol_selection: string;
+    avec_name: string;
+    table_group: string;
+    representation: string;
+    greeting: boolean;
+    sillis: boolean;
+    dance_training: boolean;
 }
