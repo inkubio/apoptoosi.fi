@@ -24,7 +24,9 @@
       <h3 v-if="quota.length === 0">{{ $t("signups") }}</h3>
 
       <ol v-if="p_count != 0">
-        <li v-for="p in participants">{{p.first_name}} {{p.last_name}}</li>
+        <li v-for="p in participants">
+          {{p.public_name ? p.first_name + " " + p.last_name : $t("hidden")}}
+        </li>
       </ol>
       <p v-else>{{ $t("no_signups") }}</p>
 
