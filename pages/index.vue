@@ -17,9 +17,9 @@
       <span v-if="page.hero_image_credit != null" id="image_credit">{{page?.hero_image_credit}}</span>
     </div>
     <nav id="navigation">
-      <NuxtLink id="events" :to="localePath('events')" class="nav-button">Tapahtumat</NuxtLink>
-      <NuxtLink id="signup" :to="localePath('signup')" class="nav-button disabled" >Ilmoittautuminen</NuxtLink>
-      <NuxtLink id="contact" :to="localePath('contact')" class="nav-button">Yhteystiedot</NuxtLink>
+      <NuxtLink id="events" :to="localePath('events')" class="nav-button">{{ $t("events") }}</NuxtLink>
+      <NuxtLink id="signup" :to="localePath('signup')" class="nav-button disabled" >{{ $t("signup") }}</NuxtLink>
+      <NuxtLink id="contact" :to="localePath('contact')" class="nav-button">{{ $t("contact") }}t</NuxtLink>
     </nav>
     <div id="content" v-html="$mdRenderer.render(page.translations[0]?.description)" />
     <home-footer id="footer" :title="page.translations[0]?.footer_title"/>
