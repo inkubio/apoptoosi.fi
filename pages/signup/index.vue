@@ -3,16 +3,16 @@
     <h2>{{page.translations[0].title}}</h2>
     <div id="content" v-html="$mdRenderer.render(page.translations[0].description)" />
     <div id="quota-container">
-      <p class="spots">Kiintiö: {{p_count}} / {{page.quota}}</p>
-      <p class="spots" v-if="p_count >= page.quota">Jonossa: {{p_count - page.quota}}</p>
+      <p class="spots">{{ $t("quota") }}:: {{p_count}} / {{page.quota}}</p>
+      <p class="spots" v-if="p_count >= page.quota">{{ $t("queue") }}: {{p_count - page.quota}}</p>
     </div>
 
     <div class="quota_selection">
       <button @click="select_quota('open')" :class="{selected: quota == 'open'}">
-        Avoin
+        {{ $t("open_quota") }}
       </button>
       <button @click="select_quota('invitee')" :class="{selected: quota == 'invitee'}">
-        Kutsuvieras
+        {{ $t("invitee_quota") }}
       </button>
     </div>
 
@@ -21,12 +21,12 @@
         :quota="quota"
     />
     <div v-else>
-      <h3 v-if="quota.length === 0">Ilmoittautuneet</h3>
+      <h3 v-if="quota.length === 0">{{ $t("signups") }}</h3>
 
       <ol v-if="p_count != 0">
         <li v-for="p in participants">{{p.first_name}} {{p.last_name}}</li>
       </ol>
-      <p v-else>Ei ilmoittautuneita</p>
+      <p v-else>{{ $t("no_signups") }}</p>
 
     </div>
   </div>

@@ -10,7 +10,7 @@
              :parity=index />
     </li>
   </ul>
-  <ul v-else><p>Tapahtumat julkaistaan myöhemmin</p></ul>
+  <ul v-else>{{ $t("no_events") }}</ul>
 </template>
 
 <script setup lang="ts">
