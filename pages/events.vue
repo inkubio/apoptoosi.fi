@@ -10,7 +10,7 @@
              :parity=index />
     </li>
   </ul>
-  <ul v-else>{{ $t("no_events") }}</ul>
+  <p v-else class="content">{{ $t("no_events") }}</p>
 </template>
 
 <script setup lang="ts">

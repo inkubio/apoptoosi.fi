@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2>{{page.translations[0].title}}</h2>
-    <div id="content" v-html="$mdRenderer.render(page.translations[0].description)" />
+    <div class="content" v-html="$mdRenderer.render(page.translations[0].description)" />
     <address>
       <a :href="`mailto:${page.email}`">{{page.email}}</a>
     </address>

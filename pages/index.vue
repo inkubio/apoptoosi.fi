@@ -4,15 +4,15 @@
       <nav id="language-selection">
         <button v-for="l in locales"
                 class="language-button"
-                :class="{'selected-language': l == locale}"
-                @click="setLocale(l)">{{l}}</button>
+                :class="{'selected-language': l.value == locale}"
+                @click="setLocale(l.value)">{{l}}</button>
       </nav>
       <div class="title-container">
         <h1 id="title" v-if="page?.logo != null">
           <img :src="`${$directus.url}assets/${page.logo}`" :alt="general?.event_name">
         </h1>
-        <h1 v-else id="title">{{general?.event_name}}</h1>
-        <p id="countdown">{{formatDate(general.event_date)}}</p>
+        <h1 v-else class="title name">{{general?.event_name}}</h1>
+        <p id="event-date">{{formatDate(general?.event_date)}}</p>
       </div>
       <span v-if="page.hero_image_credit != null" id="image_credit">{{page?.hero_image_credit}}</span>
     </div>
@@ -21,7 +21,7 @@
       <NuxtLink id="signup" :to="localePath('signup')" class="nav-button disabled" >{{ $t("signup") }}</NuxtLink>
       <NuxtLink id="contact" :to="localePath('contact')" class="nav-button">{{ $t("contact") }}t</NuxtLink>
     </nav>
-    <div id="content" v-html="$mdRenderer.render(page.translations[0]?.description)" />
+    <div class="content" v-html="$mdRenderer.render(page.translations[0]?.description)" />
     <home-footer id="footer" :title="page.translations[0]?.footer_title"/>
   </main>
 </template>
@@ -89,14 +89,28 @@ main {
   right: 0;
   top: 25%;
 }
-#title {
+.title {
   text-align: center;
   font-size: min(15vmin,6rem);
   font-weight: normal;
-  font-family: var(--title-font);
   color: var(--title_color);
   margin-bottom: 0;
+  vertical-align: bottom;
 }
+
+.year {
+  font-family: var(--nav-font);
+  font-size: min(15vmin,4.5rem);
+  line-height: 1;
+  opacity: 0.9;
+}
+
+.name {
+  font-family: var(--title-font);
+  vertical-align: text-bottom;
+  line-height: 1;
+}
+
 #title img {
   height: clamp(1rem, 25vmin, 15rem);
 }
@@ -110,12 +124,12 @@ main {
   color: var(--text-secondary);
 }
 
-#countdown {
+#event-date {
   width: 100%;
   text-align: center;
   font-size: min(10vmin,4rem);
   font-weight: normal;
-  font-family: var(--heading-font);
+  font-family: var(--title-font);
   color: var(--title_color);
   margin-top: 0;
 }
@@ -149,7 +163,7 @@ main {
 .language-button {
   background: none;
   border: none;
-  font-family: var(--title-font), san-serif;
+  font-family: var(--nav-font), san-serif;
   font-size: clamp(0.5rem, 10vmin,1rem);
 }
 .language-button:hover {

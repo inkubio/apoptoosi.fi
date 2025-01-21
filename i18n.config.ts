@@ -11,9 +11,12 @@ export default defineI18nConfig(() => ({
             open_quota: 'Avoin',
             invitee_quota: 'Kutsuvieras',
             signups: "Ilmoittautuneet",
-            no_signup: "Ei ilmoittautuneita",
+            no_signups: "Ei ilmoittautuneita",
             no_events: "Tapahtumat julkaistaan myöhemmin.",
             hidden: "Piilotettu",
+            yes: "Kyllä",
+            no: "Ei",
+
         },
         en: {
             events: 'Events',
@@ -24,7 +27,7 @@ export default defineI18nConfig(() => ({
             open_quota: 'Open',
             invitee_quota: 'Invitee',
             signups: "Sign ups",
-            no_signup: "No sign ups.",
+            no_signups: "No sign ups.",
             no_events: "The events will be published at a later date.",
             hidden: "Hidden",
         }
