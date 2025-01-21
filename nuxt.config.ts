@@ -23,10 +23,9 @@ export default defineNuxtConfig({
     },
 
     runtimeConfig: {
+        SIGNUP_API_TOKEN: process.env.SIGNUP_API_TOKE,
         public: {
-            //baseURL: 'https://directus.apoptoosi.fi/',
-            BASE_URL: 'http://localhost:8055',
-            //apiBase: 'https://directus.apoptoosi.fi/api/',
+            BASE_URL: process.env.DIRECTUS_BASE_URL,
         },
     },
 

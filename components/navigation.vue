@@ -70,7 +70,7 @@ nav {
 .language-button {
   background: none;
   border: none;
-  font-family: var(--title-font), san-serif;
+  font-family: var(--nav-font), sans-serif;
   font-size: clamp(0.5rem, 10vmin,1rem);
 }
 .language-button:hover {

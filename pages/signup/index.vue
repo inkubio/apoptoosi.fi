@@ -1,9 +1,9 @@
 <template>
   <div>
     <h2>{{page.translations[0].title}}</h2>
-    <div id="content" v-html="$mdRenderer.render(page.translations[0].description)" />
+    <div class="content" v-html="$mdRenderer.render(page.translations[0].description)" />
     <div id="quota-container">
-      <p class="spots">{{ $t("quota") }}:: {{p_count}} / {{page.quota}}</p>
+      <p class="spots">{{ $t("quota") }}: {{p_count}} / {{page.quota}}</p>
       <p class="spots" v-if="p_count >= page.quota">{{ $t("queue") }}: {{p_count - page.quota}}</p>
     </div>
 

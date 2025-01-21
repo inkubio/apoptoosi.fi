@@ -1,20 +1,22 @@
 <template>
   <form class="container" @submit.prevent="handleSubmit">
-    <!--<div v-for="field in fields">
-
+    <div v-for="(field, i) in form_fields" :key="i">
       <form-text-field v-if="field.meta.interface === 'input'" :field_key="field.field"
-                       :name="field.meta?.translations[0]?.translation" :required="field.meta.required"
+                       :name="field.meta?.display" :required="field.meta.required"
                        :placeholder="field.meta.options?.placeholder"
                        v-model="form[`${field.field}`]"
       />
       <form-selection-field v-else-if="field.meta.interface === 'select-radio'" :field_key="field.field"
-                            :name="field.meta?.translations[0]?.translation" :required="field.meta.required"
-                            :choices="field.meta.options.choices"
+                            :name="field.meta?.display" :required="field.meta.required"
+                            :choices="field?.meta?.options?.choices"
                             v-model="form[`${field.field}`]"
       />
       <p v-else>Not implemented</p>
+    </div>
+    <!--<div v-for="field in fields">
+
     </div>-->
-    <label for="firstname">Etunimi*</label>
+    <!--<label for="firstname">Etunimi*</label>
     <input type="text" id="firstname" name="firstname" v-model="form.first_name" placeholder="Teemu" required>
 
     <label for="lastname">Sukunimi*</label>
@@ -144,6 +146,7 @@
         </label>
       </div>
     </fieldset>
+    -->
 
     <button type="submit">Lähetä</button>
   </form>
@@ -151,12 +154,15 @@
 </template>
 
 <script setup>
-const { $directus, $createItem} = useNuxtApp()
+const { $directus, $createItem, $withToken, $readFieldsByCollection, $readItems} = useNuxtApp()
+const runtimeConfig = useRuntimeConfig()
 
 const props = defineProps({
   quota: String,
   reservation_time: String,
 })
+
+const {data: form_fields} = await useFetch("/api/signup_fields")
 
 const form = useState('form', () => {
   return {
@@ -181,12 +187,7 @@ const handleSubmit = async () => {
     console.log(res)
     alert(`Signup failed with status code ${res.status}, check browser log. If problem persists contact apoptoosi@inkubio.fi`)
   }
-
-
-
-
 }
-
 </script>
 
 <style scoped>

@@ -43,7 +43,7 @@ h2, h3 {
     font-size: clamp(1rem, 7vmin,2.5rem);
 }
 
-#content, p {
+.content, p {
     font-family: var(--body-font), serif;
     text-align: center;
     margin: 2rem auto;
@@ -68,6 +68,7 @@ h2, h3 {
     --secondary: #04395e;
 
     --body-font: 'BenguiatProITC', sans-serif;
-    --title-font: 'BrimNarrow', cursive;
+    --title-font: 'KilnSerif', cursive;
     --heading-font: 'IndustryInc', serif;
+    --nav-font: 'BrimNarrow', cursive;
 }

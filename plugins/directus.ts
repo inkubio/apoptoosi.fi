@@ -6,7 +6,8 @@ import {
     readFieldsByCollection,
     createItem,
     aggregate,
-    readSingleton
+    readSingleton,
+    withToken
 } from '@directus/sdk';
 import type {
     ContactPage, ContactPageTranslations,
@@ -33,10 +34,12 @@ interface Schema {
     participants: Participants[];
 }
 
-const directus = createDirectus<Schema>("http://localhost:8055").with(rest());
+//const runtimeConfig = useRuntimeConfig()
 
-export default defineNuxtPlugin(() => {
+
+export default defineNuxtPlugin(({$config}) => {
+    const directus = createDirectus<Schema>($config.public.BASE_URL).with(rest());
     return {
-        provide: {directus, readItem, readItems, readFieldsByCollection, createItem, aggregate, readSingleton},
+        provide: {directus, readItem, readItems, readFieldsByCollection, createItem, aggregate, readSingleton, withToken},
     };
 });
