@@ -23,9 +23,9 @@ export default defineNuxtConfig({
     },
 
     runtimeConfig: {
-        SIGNUP_API_TOKEN: process.env.SIGNUP_API_TOKE,
+        SIGNUP_API_TOKEN: process.env.SIGNUP_API_TOKEN,
         public: {
-            BASE_URL: process.env.DIRECTUS_BASE_URL,
+            DIRECTUS_BASE_URL: process.env.DIRECTUS_BASE_URL,
         },
     },
 
@@ -35,7 +35,7 @@ export default defineNuxtConfig({
         azure: {
             config: {
                 platform: {
-                    apiRuntime: 'node:18'
+                    apiRuntime: 'node:22'
                 }
             }
         }
