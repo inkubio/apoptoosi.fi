@@ -25,7 +25,8 @@ export default defineNuxtConfig({
     runtimeConfig: {
         SIGNUP_API_TOKEN: process.env.SIGNUP_API_TOKEN,
         public: {
-            DIRECTUS_BASE_URL: process.env.DIRECTUS_BASE_URL,
+            //DIRECTUS_BASE_URL: process.env.DIRECTUS_BASE_URL,
+            DIRECTUS_BASE_URL: "https://directus.apoptoosi.party"
         },
     },
 
