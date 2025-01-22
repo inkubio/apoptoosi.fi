@@ -2,7 +2,7 @@
   <div>
     <label :for="field_key">{{name}}<span v-if=required class="required">*</span></label>
     <input :type="field_key === 'email' ? 'email' : 'text'" :name="field_key" :id="field_key" :placeholder="placeholder"
-           :value="modelValue" v-model="model" :required="required">
+           v-model="model" :required="required">
   </div>
 </template>
 
@@ -22,13 +22,18 @@ label {
   text-align: center;
   font-family: var(--body-font);
   font-size: clamp(1rem, 3vmin, 1.2rem);
+  padding: 0.5em;
 }
-input[type=text], input[type=email] {
+input[type=text], input[type=email], input[type=number] {
   border: none;
   font-size: clamp(1rem, 3vmin, 1.2rem);
+  padding: 0.5em;
+  border-radius: 0.5em;
+  appearance: textfield;
 }
+
 input:focus {
-  outline: none;
+  outline: 2px solid var(--primary);
 }
 
 .required {

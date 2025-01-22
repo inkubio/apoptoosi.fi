@@ -1,8 +1,8 @@
 <template>
   <div>
     <label :for="field_key">{{name}}<span v-if=required class="required">*</span></label>
-    <input :type="field_key === 'email' ? 'email' : 'text'" :name="field_key" :id="field_key" :placeholder="placeholder"
-           :value="modelValue" @input="$emit('update:modelValue', $event.target.value)" :required="required">
+    <textarea name="field_key" :id="field_key" :placeholder="placeholder"
+           v-model="model" :required="required"></textarea>
   </div>
 </template>
 
@@ -12,9 +12,8 @@ const props = defineProps({
   required: Boolean,
   name: String,
   placeholder: String,
-  modelValue: String,
 })
-const emits = defineEmits(['update:modelValue'])
+const model = defineModel()
 </script>
 
 <style scoped>
@@ -23,13 +22,21 @@ label {
   text-align: center;
   font-family: var(--body-font);
   font-size: clamp(1rem, 3vmin, 1.2rem);
+  padding: 0.5em;
 }
-input[type=text], input[type=email] {
+textarea {
   border: none;
   font-size: clamp(1rem, 3vmin, 1.2rem);
+  padding: 0.5em;
+  border-radius: 0.5em;
+  appearance: textfield;
+  width: 25ch;
+  height: 4em;
+  max-height: 200px;
+  max-width: 500px;
 }
-input:focus {
-  outline: none;
+textarea:focus {
+  outline: 2px solid var(--primary);
 }
 
 .required {

@@ -16,7 +16,14 @@ export default defineI18nConfig(() => ({
             hidden: "Piilotettu",
             yes: "Kyllä",
             no: "Ei",
-
+            alumni: "Alumni",
+            student: "Opiskelija",
+            vip: "VIP",
+            fish: "Kala",
+            vegetarian: "Kasvis",
+            alcohol_yes: "Alkoholillinen",
+            alcohol_no: "Alkoholiton",
+            only_wines: "Vain viinit",
         },
         en: {
             events: 'Events',
@@ -30,6 +37,16 @@ export default defineI18nConfig(() => ({
             no_signups: "No sign ups.",
             no_events: "The events will be published at a later date.",
             hidden: "Hidden",
+            yes: "Yes",
+            no: "No",
+            alumni: "Alumni",
+            student: "Student",
+            vip: "VIP",
+            fish: "Fish",
+            vegetarian: "Vegetarian",
+            alcohol_yes: "Alcohol",
+            alcohol_no: "No alcohol",
+            only_wines: "Only wines",
         }
     }
 }))
