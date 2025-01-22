@@ -4,8 +4,8 @@
       <nav id="language-selection">
         <button v-for="l in locales"
                 class="language-button"
-                :class="{'selected-language': l.value == locale}"
-                @click="setLocale(l.value)">{{l}}</button>
+                :class="{'selected-language': l == locale}"
+                @click="setLocale(l)">{{l}}</button>
       </nav>
       <div class="title-container">
         <h1 id="title" v-if="page?.logo != null">

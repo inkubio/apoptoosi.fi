@@ -7,6 +7,7 @@ import {
     createItem,
     aggregate,
     readSingleton,
+    authentication
 } from '@directus/sdk';
 import type {
     ContactPage, ContactPageTranslations,
@@ -37,7 +38,9 @@ interface Schema {
 
 
 export default defineNuxtPlugin(({$config}) => {
-    const directus = createDirectus<Schema>($config.public.BASE_URL).with(rest());
+    const directus = createDirectus<Schema>($config.public.DIRECTUS_BASE_URL)
+        //.with(authentication('cookie', { credentials: 'include' }))
+        .with(rest());
     return {
         provide: {directus, readItem, readItems, readFieldsByCollection, createItem, aggregate, readSingleton},
     };
