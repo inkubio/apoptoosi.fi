@@ -1,7 +1,14 @@
 <template>
   <form class="container" @submit.prevent="handleSubmit">
-    <div v-for="(field, i) in form_fields" :key="i">
-      <form-text-field v-if="field.meta.interface === 'input'" :field_key="field.field"
+    <div v-for="(field, i) in form_fields_sorted" :key="i">
+      <form-fields-short-text v-if="field?.meta?.interface === 'input'"
+                                         :field_key="field.field"
+                                         :name="field?.meta?.translations[1].translation"
+                                         :required="field?.meta.required"
+                                         :placeholder="field?.options?.placeholder"
+                                         v-model="form[field.field]"
+      />
+      <!--<form-text-field v-if="field.meta.interface === 'input'" :field_key="field.field"
                        :name="field.meta?.display" :required="field.meta.required"
                        :placeholder="field.meta.options?.placeholder"
                        v-model="form[`${field.field}`]"
@@ -11,13 +18,19 @@
                             :choices="field?.meta?.options?.choices"
                             v-model="form[`${field.field}`]"
       />
-      <p v-else>Not implemented</p>
+      <p v-else>Not implemented</p>-->
     </div>
     <!--<div v-for="field in fields">
 
     </div>-->
-    <!--<label for="firstname">Etunimi*</label>
-    <input type="text" id="firstname" name="firstname" v-model="form.first_name" placeholder="Teemu" required>
+    <!--
+    <label for="firstname">Etunimi*</label>
+    <input type="text"
+           id="firstname"
+           name="firstname"
+           v-model="form.first_name"
+           placeholder="Teemu"
+           required>
 
     <label for="lastname">Sukunimi*</label>
     <input type="text" id="lastname" name="lastname" v-model="form.last_name" placeholder="Teekkari" required>
@@ -162,7 +175,12 @@ const props = defineProps({
   reservation_time: String,
 })
 
-const {data: form_fields} = await useFetch("/api/signup_fields")
+const {data: form_fields} = await useFetch("/api/signup/fields")
+
+const form_fields_sorted = computed(() => {
+  console.log(form_fields.value)
+  return form_fields.value.toSorted((a, b) => a.meta.sort - b.meta.sort)
+})
 
 const form = useState('form', () => {
   return {
@@ -175,18 +193,19 @@ const router = useRouter();
 
 const handleSubmit = async () => {
   form.value["quota"] = props.quota
-  const {data: res} = await useAsyncData('send_signup', () => {
+  /*const {data: res} = await useAsyncData('send_signup', () => {
     return $directus.request(
         $createItem('participants', form.value)
     )
-  })
+  })*/
+  console.log(form.value)
 
-  if (res.value.ok) {
+  /*if (res.value.ok) {
     await router.push({path: "signup/success", query: form.value})
   } else {
     console.log(res)
     alert(`Signup failed with status code ${res.status}, check browser log. If problem persists contact apoptoosi@inkubio.fi`)
-  }
+  }*/
 }
 </script>
 

@@ -8,10 +8,10 @@
     </div>
 
     <div class="quota_selection">
-      <button @click="select_quota('open')" :class="{selected: quota == 'open'}">
+      <button @click="select_quota('open')" :class="{selected: quota == 'open'}" disabled>
         {{ $t("open_quota") }}
       </button>
-      <button @click="select_quota('invitee')" :class="{selected: quota == 'invitee'}">
+      <button @click="select_quota('invitee')" :class="{selected: quota == 'invitee'}" disabled>
         {{ $t("invitee_quota") }}
       </button>
     </div>
