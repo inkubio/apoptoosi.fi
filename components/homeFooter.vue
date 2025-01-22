@@ -1,8 +1,8 @@
 <template>
   <div id="footer">
     <h2>{{ title }}</h2>
-    <div v-for="company in footer" class="container">
-      <a :href="company.company_website">
+    <div class="container">
+      <a :href="company.company_website"  v-for="company in footer">
         <img :src="`${$directus.url}assets/${company.logo}`">
       </a>
     </div>
@@ -34,8 +34,8 @@ h2  {
 }
 .container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, 1fr);
-  justify-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  align-items: center;
 }
 img {
   width: clamp(10rem, 20rem, 50vw);
