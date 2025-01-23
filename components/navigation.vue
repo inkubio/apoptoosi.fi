@@ -8,7 +8,7 @@
       <div id="language-selector">
         <button v-for="l in locales"
                 class="language-button"
-                :class="{'selected-language': l == locale}"
+                :class="{'selected-language': l === locale}"
                 @click="setLocale(l)">{{l}}</button>
       </div>
     </div>

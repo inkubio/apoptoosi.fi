@@ -115,5 +115,6 @@ export interface Participants{
     representation: string;
     greeting: boolean;
     sillis: boolean;
+    vip: boolean,
     dance_training: boolean;
 }

@@ -16,7 +16,8 @@
   "dependencies": {
     "@directus/sdk": "^18.0.3",
     "@types/markdown-it": "^14.1.2",
-    "markdown-it": "^14.1.0"
+    "markdown-it": "^14.1.0",
+    "nuxt-storage": "^1.2.2"
   },
   "engines": {
     "node": ">=22.0.0"

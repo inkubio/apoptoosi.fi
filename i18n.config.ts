@@ -1,6 +1,9 @@
+import {DEFAULT_LOCALE} from "@intlify/core-base";
+
 export default defineI18nConfig(() => ({
     legacy: false,
-    locale: 'fi',
+    locale: "fi",
+    defaultLocale: 'fi',
     messages: {
         fi: {
             events: 'Tapahtumat',
@@ -8,8 +11,8 @@ export default defineI18nConfig(() => ({
             contact: 'Yhteystiedot',
             quota: 'Kiintiö',
             queue: 'Jonossa',
-            open_quota: 'Avoin',
-            invitee_quota: 'Kutsuvieras',
+            open: 'Avoin',
+            invitee: 'Kutsuvieras',
             signups: "Ilmoittautuneet",
             no_signups: "Ei ilmoittautuneita",
             no_events: "Tapahtumat julkaistaan myöhemmin.",
@@ -24,6 +27,11 @@ export default defineI18nConfig(() => ({
             alcohol_yes: "Alkoholillinen",
             alcohol_no: "Alkoholiton",
             only_wines: "Vain viinit",
+            sign_up: "Ilmoittaudu",
+            signup_success: "Ilmoittauduit seuraavilla tiedoilla",
+            true: "Kyllä",
+            false: "Ei",
+
         },
         en: {
             events: 'Events',
@@ -31,8 +39,8 @@ export default defineI18nConfig(() => ({
             contact: 'Contact',
             quota: 'Quota',
             queue: 'Queue',
-            open_quota: 'Open',
-            invitee_quota: 'Invitee',
+            open: 'Open',
+            invitee: 'Invitee',
             signups: "Sign ups",
             no_signups: "No sign ups.",
             no_events: "The events will be published at a later date.",
@@ -47,6 +55,10 @@ export default defineI18nConfig(() => ({
             alcohol_yes: "Alcohol",
             alcohol_no: "No alcohol",
             only_wines: "Only wines",
+            sign_up: "Sign up",
+            signup_success: "You have signed up with the following information",
+            true: "Yes",
+            false: "No",
         }
     }
 }))

@@ -3,42 +3,44 @@
     <div v-for="(field, i) in form_fields_sorted" :key="i">
       <form-fields-short-text v-if="field?.meta?.interface === 'input'"
                                          :field_key="field.field"
-                                         :name="field?.meta?.translations[1].translation"
+                                         :name="field?.meta?.translations[locale_index].translation"
                                          :required="field?.meta.required"
-                                         :placeholder="field?.options?.placeholder"
+                                         :placeholder="field?.meta?.options?.placeholder"
                                          v-model="form[field.field]"
       />
       <form-fields-long-text v-else-if="field?.meta?.interface === 'input-multiline'"
                              :field_key="field.field"
-                             :name="field?.meta?.translations[1].translation"
+                             :name="field?.meta?.translations[locale_index].translation"
                              :required="field?.meta.required"
-                             :placeholder="field?.options?.placeholder"
+                             :placeholder="field?.meta?.options?.placeholder"
                              v-model="form[field.field]"
       />
       <form-fields-toggle v-else-if="field?.meta?.interface === 'boolean'"
                           :field_key="field.field"
-                          :name="field.meta?.translations[1].translation"
+                          :name="field.meta?.translations[locale_index].translation"
                           :required="field?.meta.required"
                           v-model="form[field.field]"
       />
       <form-fields-radio v-else-if="field?.meta?.interface === 'select-radio'"
                          :field_key="field.field"
                          :required="field?.meta.required"
-                         :name="field.meta?.translations[1].translation"
+                         :name="field.meta?.translations[locale_index].translation"
                          :choices="field.meta.options.choices"
                          v-model="form[field.field]"
       />
       <p v-else>Not implemented</p>
     </div>
-    <button type="submit">Lähetä</button>
+    <button type="submit">{{ $t("sign_up") }}</button>
   </form>
 
 </template>
 
 <script setup>
-const { $directus, $createItem, $withToken, $readFieldsByCollection, $readItems} = useNuxtApp()
-const runtimeConfig = useRuntimeConfig()
-const {locales, locale, } = useI18n()
+import nuxtStorage from "nuxt-storage/nuxt-storage";
+
+const {locale} = useI18n()
+const localePath = useLocalePath()
+const router = useRouter();
 
 const props = defineProps({
   quota: String,
@@ -48,7 +50,6 @@ const props = defineProps({
 const {data: form_fields} = await useFetch("/api/signup/fields")
 
 const form_fields_sorted = computed(() => {
-  console.log(form_fields.value)
   return form_fields.value.toSorted((a, b) => a.meta.sort - b.meta.sort)
 })
 
@@ -58,24 +59,31 @@ const form = useState('form', () => {
   }
 })
 
-
-const router = useRouter();
+// FIX: Quick and dirty solution for selecting language for form field.
+const locale_index = computed(() => {
+  if (locale.value == "en") {
+    return 0
+  }
+  if (locale.value == "fi") {
+    return 1
+  }
+  return 0
+})
 
 const handleSubmit = async () => {
   form.value["quota"] = props.quota
-  /*const {data: res} = await useAsyncData('send_signup', () => {
-    return $directus.request(
-        $createItem('participants', form.value)
-    )
-  })*/
-  console.log(form.value)
+  const {body, success, status} = await $fetch("/api/signup/submit", {
+    method: "POST",
+    body: form.value,
+  })
 
-  /*if (res.value.ok) {
-    await router.push({path: "signup/success", query: form.value})
+  console.log(success)
+  if (success) {
+    nuxtStorage.sessionStorage.setData("form", body)
+    await router.push({path: localePath('/signup/success')})
   } else {
-    console.log(res)
-    alert(`Signup failed with status code ${res.status}, check browser log. If problem persists contact apoptoosi@inkubio.fi`)
-  }*/
+    alert(`Signup failed with status code ${status}, check browser log. If problem persists contact it@inkubio.fi`)
+  }
 }
 </script>
 
