@@ -3,11 +3,11 @@
     <legend>{{name}}<span v-if=required class="required">*</span></legend>
     <div class="radio_select">
       <label :for="`${field_key}-yes`">
-        <input :id="`${field_key}-yes`" type="radio" v-model="model" value="true">
+        <input :id="`${field_key}-yes`" type="radio" v-model="model" value=true>
         {{$t("yes")}}
       </label>
       <label :for="`${field_key}-no`">
-        <input :id="`${field_key}-no`" type="radio" v-model="model" value="false">
+        <input :id="`${field_key}-no`" type="radio" v-model="model" value=false>
         {{$t("no")}}
       </label>
     </div>
