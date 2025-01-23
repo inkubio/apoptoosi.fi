@@ -35,7 +35,7 @@ h2  {
 .container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-  align-items: center;
+  row-gap: 3rem;
 }
 img {
   width: clamp(10rem, 20rem, 50vw);
@@ -44,6 +44,6 @@ a {
   text-align: center;
 }
 #footer {
-  padding-bottom: 2rem;
+  margin-bottom: 2rem;
 }
 </style>
