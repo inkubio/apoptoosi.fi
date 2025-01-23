@@ -19,7 +19,7 @@
     <nav id="navigation">
       <NuxtLink id="events" :to="localePath('events')" class="nav-button">{{ $t("events") }}</NuxtLink>
       <NuxtLink id="signup" :to="localePath('signup')" class="nav-button disabled" >{{ $t("signup") }}</NuxtLink>
-      <NuxtLink id="contact" :to="localePath('contact')" class="nav-button">{{ $t("contact") }}t</NuxtLink>
+      <NuxtLink id="contact" :to="localePath('contact')" class="nav-button">{{ $t("contact") }}</NuxtLink>
     </nav>
     <div class="content" v-html="$mdRenderer.render(page.translations[0]?.description)" />
     <home-footer id="footer" :title="page.translations[0]?.footer_title"/>
