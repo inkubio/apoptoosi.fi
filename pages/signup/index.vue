@@ -20,7 +20,7 @@
         v-if="quota.length !== 0"
         :quota="quota"
     />
-    <div v-else>
+    <div v-else class="participant-container ">
       <h3 v-if="quota.length === 0">{{ $t("signups") }}</h3>
 
       <ol v-if="p_count != 0">
@@ -158,11 +158,8 @@ button:disabled {
 .selected {
   background-color: var(--nav3);
 }
-#participant-container {
+.participant-container {
   padding: 1rem 0;
-}
-.people-container > h2 {
-  margin-bottom: 1rem;
 }
 .spots {
   text-align: center;
