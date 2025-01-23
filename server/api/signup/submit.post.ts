@@ -5,7 +5,12 @@ export default defineEventHandler(async (event) => {
     const base_url = process.env.DIRECTUS_BASE_URL || "http://localhost:8055";
     const body = await readBody(event);
 
-    console.log(Date.now())
+    for (const key in body) {
+        const value = body[key];
+        if (value == "true" || value == "false") {
+            body[key] = value == "true";
+        }
+    }
 
     const directus = createDirectus(base_url)
         .with(staticToken(api_token))

@@ -77,9 +77,8 @@ const handleSubmit = async () => {
     body: form.value,
   })
 
-  console.log(success)
   if (success) {
-    nuxtStorage.sessionStorage.setData("form", body)
+    nuxtStorage.sessionStorage.setData("form", form.value)
     await router.push({path: localePath('/signup/success')})
   } else {
     alert(`Signup failed with status code ${status}, check browser log. If problem persists contact it@inkubio.fi`)
