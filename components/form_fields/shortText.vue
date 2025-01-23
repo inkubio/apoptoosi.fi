@@ -30,6 +30,8 @@ input[type=text], input[type=email], input[type=number] {
   padding: 0.5em;
   border-radius: 0.5em;
   appearance: textfield;
+  outline: 2px solid #c1c5c9;
+  width: 30ch;
 }
 
 input:focus {

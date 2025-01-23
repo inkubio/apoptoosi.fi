@@ -140,7 +140,8 @@ button {
   font-weight: lighter;
   font-family: var(--body-font);
   border: none;
-  transition: 0.3s;
+  border-radius: 0.5em;
+  transition: 0.1s;
 }
 
 button:hover {

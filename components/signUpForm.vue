@@ -109,6 +109,7 @@ button {
   font-weight: lighter;
   font-family: var(--body-font);
   border: none;
+  border-radius: 0.5em;
   transition: 0.3s;
 }
 button:hover {

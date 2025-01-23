@@ -30,10 +30,11 @@ textarea {
   padding: 0.5em;
   border-radius: 0.5em;
   appearance: textfield;
-  width: 25ch;
+  width: 30ch;
   height: 4em;
-  max-height: 200px;
+  max-height: 400px;
   max-width: 500px;
+  outline: 2px solid #c1c5c9;
 }
 textarea:focus {
   outline: 2px solid var(--primary);

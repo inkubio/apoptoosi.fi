@@ -49,6 +49,10 @@ label {
   gap: 1.5rem;
 }
 
+input[type=radio]:checked {
+  accent-color: var(--primary);
+}
+
 .required {
   vertical-align: top;
   color: var(--nav1);
