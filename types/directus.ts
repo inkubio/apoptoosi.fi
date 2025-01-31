@@ -49,6 +49,8 @@ export interface SignUpPage{
     signup_close: string; // date
     signup_open_invite: string; // date
     signup_close_invite: string; // date
+    signup_enabled_open: boolean;
+    signup_enabled_invite: boolean;
     translations: SignUpPageTranslations[];
 }
 
