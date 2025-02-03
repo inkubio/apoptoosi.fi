@@ -3,7 +3,7 @@
     <legend>{{name}}<span v-if=required class="required">*</span></legend>
     <div class="radio_select">
       <label v-for="choice in choices" :for="choice.value" :key="choice.value">
-        <input :id="choice.value" type="radio" v-model="model" :value="choice.value">
+        <input :name="name" :id="choice.value" type="radio" v-model="model" :value="choice.value"  :required="required">
         {{$t(choice.text.split(':')[1])}}
       </label>
     </div>

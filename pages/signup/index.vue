@@ -37,6 +37,7 @@
 <script setup lang="ts">
 const { $directus, $readItems, $readSingleton, $aggregate, $mdRenderer} = useNuxtApp()
 const {locale} = useI18n()
+await preloadComponents('SignUpForm')
 
 const quota = useState('quota', () => "")
 
