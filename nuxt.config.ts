@@ -30,7 +30,6 @@ export default defineNuxtConfig({
     },
 
     css: ['@/assets/theme.css'],
-
     nitro: {
         azure: {
             config: {
