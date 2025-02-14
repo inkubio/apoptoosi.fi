@@ -1,8 +1,12 @@
-# apoptoosi.fi
+# apoptoosi.party
 Inkubio ry's annual ball website frontend built with nuxt3. Uses the Directus headless CMS as the backend.
 
 ## Deployment
 Changes to master branch automatically deploys the changes to Azure static web service.
+
+### Requirements
+- The frontend of this app requirements are defined in package.json.
+- Directus CMS uses version v11.4.1
 
 ## Local development
 ### Setup
@@ -10,12 +14,6 @@ Changes to master branch automatically deploys the changes to Azure static web s
 Make sure to install the dependencies:
 
 ```bash
-# yarn
-yarn install
-
-# npm
-npm install
-
 # pnpm
 pnpm install --shamefully-hoist
 ```
@@ -33,7 +31,7 @@ npm run dev
 Build the application for production:
 
 ```bash
-npm run build
+pnpm run build
 ```
 
 Locally preview production build:
@@ -42,4 +40,18 @@ Locally preview production build:
 npm run preview
 ```
 
-Checkout the [deployment documentation](https://v3.nuxtjs.org/guide/deploy/presets) for more information.
+## Environment variables
+The system requires setting up two environment variables. 
+
+This is the secret token generated for a directus user with required permissions for signup
+```
+SIGNUP_API_TOKEN="secret-directus-api-token"
+```
+
+This token is used to setup the url of the directus instance used for this.
+```
+DIRECTUS_BASE_URL="http://example.com"
+```
+
+
+
